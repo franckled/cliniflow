@@ -236,6 +236,19 @@ class _NewProjectSheetState extends State<_NewProjectSheet> {
   bool _busy = false;
 
   @override
+  void initState() {
+    super.initState();
+    // Écoute directe des contrôleurs : fiable aussi avec la saisie prédictive
+    // et la dictée des claviers mobiles dans le navigateur.
+    _title.addListener(_refresh);
+    _acronym.addListener(_refresh);
+  }
+
+  void _refresh() {
+    if (mounted) setState(() {});
+  }
+
+  @override
   void dispose() {
     _title.dispose();
     _acronym.dispose();
@@ -285,7 +298,6 @@ class _NewProjectSheetState extends State<_NewProjectSheet> {
             controller: _acronym,
             textCapitalization: TextCapitalization.characters,
             decoration: const InputDecoration(labelText: 'Acronyme'),
-            onChanged: (_) => setState(() {}),
           ),
           const SizedBox(height: 12),
           TextField(
@@ -294,7 +306,6 @@ class _NewProjectSheetState extends State<_NewProjectSheet> {
             minLines: 1,
             maxLines: 3,
             decoration: const InputDecoration(labelText: 'Titre de l\'étude'),
-            onChanged: (_) => setState(() {}),
           ),
           const SizedBox(height: 12),
           TextField(
@@ -306,7 +317,12 @@ class _NewProjectSheetState extends State<_NewProjectSheet> {
           const SizedBox(height: 20),
           FilledButton.icon(
             onPressed: _valid && !_busy ? _submit : null,
-            icon: const Icon(Icons.arrow_forward),
+            icon: _busy
+                ? const SizedBox.square(
+                    dimension: 18,
+                    child: CircularProgressIndicator(strokeWidth: 2),
+                  )
+                : const Icon(Icons.arrow_forward),
             label: const Text('Qualifier la recherche'),
           ),
         ],

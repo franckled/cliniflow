@@ -41,7 +41,7 @@ jobs:
       - run: bash tool/bootstrap_platforms.sh
       - run: flutter pub get
       - run: dart run flutter_launcher_icons
-      - run: flutter build apk --release
+      - run: flutter build apk --release --dart-define=APP_VERSION=android-${GITHUB_SHA::7}
       - uses: actions/upload-artifact@v5
         with:
           name: cliniflow-android-apk
@@ -61,7 +61,7 @@ jobs:
       - run: bash tool/bootstrap_platforms.sh
       - run: flutter pub get
       - run: dart run flutter_launcher_icons
-      - run: flutter build ios --release --no-codesign
+      - run: flutter build ios --release --no-codesign --dart-define=APP_VERSION=ios-${GITHUB_SHA::7}
 
   web:
     name: Build web
@@ -79,6 +79,10 @@ jobs:
       - run: >-
           flutter build web --release
           --base-href "/${{ github.event.repository.name }}/"
+          --dart-define=APP_VERSION=web-${GITHUB_SHA::7}
+      # Chaque version remplace l'ancienne sans délai : pas de service worker
+      # ni de cache navigateur sur le point d'entrée.
+      - run: python3 tool/web_no_cache.py build/web "${GITHUB_SHA::7}"
       # Les routes de l'app sont internes : on sert index.html pour toute URL.
       - run: cp build/web/index.html build/web/404.html
       - uses: actions/upload-pages-artifact@v4

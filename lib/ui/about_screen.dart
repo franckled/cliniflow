@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+/// Version affichée, injectée à la compilation (--dart-define=APP_VERSION=…).
+const appVersion = String.fromEnvironment('APP_VERSION', defaultValue: 'dev');
+
 class AboutScreen extends StatelessWidget {
   const AboutScreen({super.key});
 
@@ -61,6 +64,8 @@ class AboutScreen extends StatelessWidget {
                 'publications de l\'ANSM, de la CNIL et du Code de la santé '
                 'publique.',
           ),
+          Text('Version $appVersion',
+              style: t.bodySmall?.copyWith(color: cs.onSurfaceVariant)),
         ],
       ),
     );
