@@ -57,7 +57,7 @@ class ProjectStore extends ChangeNotifier {
   }) async {
     final now = DateTime.now();
     final p = Project(
-      id: '${now.microsecondsSinceEpoch}-${Random().nextInt(1 << 32)}',
+      id: '${now.microsecondsSinceEpoch}-${Random().nextInt(0x7fffffff)}',
       title: title.trim(),
       acronym: acronym.trim(),
       sponsor: sponsor.trim(),

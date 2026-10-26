@@ -249,12 +249,21 @@ class _NewProjectSheetState extends State<_NewProjectSheet> {
   Future<void> _submit() async {
     if (!_valid || _busy) return;
     setState(() => _busy = true);
-    final p = await widget.store.create(
-      title: _title.text,
-      acronym: _acronym.text,
-      sponsor: _sponsor.text,
-    );
-    if (mounted) Navigator.of(context).pop(p);
+    try {
+      final p = await widget.store.create(
+        title: _title.text,
+        acronym: _acronym.text,
+        sponsor: _sponsor.text,
+      );
+      if (mounted) Navigator.of(context).pop(p);
+    } on Object catch (e) {
+      // Jamais d'échec silencieux : l'utilisateur doit voir le problème.
+      if (!mounted) return;
+      setState(() => _busy = false);
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Création impossible : $e')),
+      );
+    }
   }
 
   @override
