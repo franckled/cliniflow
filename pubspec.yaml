@@ -1,0 +1,41 @@
+name: cliniflow
+description: >-
+  CliniFlow – qualifier une recherche clinique (loi Jardé, règlement 536/2014,
+  dispositifs médicaux, recherches sur données) et suivre ses démarches
+  réglementaires.
+publish_to: none
+version: 0.1.0+1
+
+environment:
+  sdk: ^3.9.0
+  flutter: ">=3.35.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  pdf: ^3.11.0
+  printing: ^5.13.0
+  shared_preferences: ^2.3.0
+  url_launcher: ^6.3.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+  flutter_launcher_icons: ^0.14.0
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/fonts/DejaVuSans.ttf
+    - assets/fonts/DejaVuSans-Bold.ttf
+
+flutter_launcher_icons:
+  image_path: assets/icon/icon.png
+  android: true
+  ios: true
+  remove_alpha_ios: true
+  adaptive_icon_background: "#12324A"
+  adaptive_icon_foreground: assets/icon/icon_foreground.png
