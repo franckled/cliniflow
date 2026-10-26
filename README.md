@@ -58,8 +58,9 @@ Identifiant d'application : `fr.cliniflow.app`.
 ## Intégration continue
 
 `.github/workflows/ci.yml` : analyse, tests, APK Android de release
-(téléchargeable dans les artefacts de l'exécution) et build iOS sans
-signature. La publication App Store / Google Play nécessitera d'ajouter les
+(téléchargeable dans les artefacts de l'exécution), build iOS sans
+signature, et version web publiée sur GitHub Pages
+(https://franckled.github.io/cliniflow/). La publication App Store / Google Play nécessitera d'ajouter les
 secrets de signature.
 
 ## Avertissement

@@ -50,7 +50,8 @@ class AboutScreen extends StatelessWidget {
           ),
           section(
             'Vos données',
-            'Les projets sont enregistrés uniquement sur cet appareil. '
+            'Les projets sont enregistrés uniquement sur cet appareil '
+                '(dans le navigateur pour la version web). '
                 'CliniFlow n\'utilise aucun compte, aucun serveur et aucun '
                 'traceur. Ne saisissez aucune donnée de patient.',
           ),
