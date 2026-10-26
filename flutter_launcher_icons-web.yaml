@@ -1,0 +1,11 @@
+# Configuration d'icônes pour le build web seul : le job web ne génère pas
+# les dossiers android/ et ios/, que la configuration principale exige.
+flutter_launcher_icons:
+  image_path: assets/icon/icon.png
+  android: false
+  ios: false
+  web:
+    generate: true
+    image_path: assets/icon/icon.png
+    background_color: "#12324A"
+    theme_color: "#12324A"

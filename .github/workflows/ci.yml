@@ -75,7 +75,7 @@ jobs:
           cache: true
       - run: bash tool/bootstrap_web.sh
       - run: flutter pub get
-      - run: dart run flutter_launcher_icons
+      - run: dart run flutter_launcher_icons -f flutter_launcher_icons-web.yaml
       - run: >-
           flutter build web --release
           --base-href "/${{ github.event.repository.name }}/"
