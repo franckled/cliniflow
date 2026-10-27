@@ -111,6 +111,8 @@ jobs:
       - run: python3 tool/web_no_cache.py build/web "${GITHUB_SHA::7}"
       # Les routes de l'app sont internes : on sert index.html pour toute URL.
       - run: cp build/web/index.html build/web/404.html
+      # Pages statiques (politique de confidentialité).
+      - run: cp tool/web_extra/*.html build/web/
       - uses: actions/upload-pages-artifact@v4
         with:
           path: build/web
