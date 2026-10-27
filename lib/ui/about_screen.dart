@@ -31,6 +31,11 @@ class AboutScreen extends StatelessWidget {
       body: ListView(
         padding: const EdgeInsets.fromLTRB(20, 16, 20, 32),
         children: [
+          ClipRRect(
+            borderRadius: BorderRadius.circular(18),
+            child: Image.asset('assets/icon/icon.png', width: 72, height: 72),
+          ),
+          const SizedBox(height: 14),
           Text('CliniFlow',
               style: t.headlineSmall?.copyWith(fontWeight: FontWeight.w800)),
           const SizedBox(height: 4),

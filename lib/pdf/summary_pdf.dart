@@ -53,6 +53,9 @@ Future<Uint8List> buildSummaryPdf(Project p, {DateTime? now}) async {
       pw.Font.ttf(await rootBundle.load('assets/fonts/DejaVuSans.ttf'));
   final bold =
       pw.Font.ttf(await rootBundle.load('assets/fonts/DejaVuSans-Bold.ttf'));
+  final logo = pw.MemoryImage(
+    (await rootBundle.load('assets/icon/logo_mark.png')).buffer.asUint8List(),
+  );
 
   final doc = pw.Document(
     title: 'CliniFlow – ${p.displayName}',
@@ -123,6 +126,10 @@ Future<Uint8List> buildSummaryPdf(Project p, {DateTime? now}) async {
         pw.Row(
           crossAxisAlignment: pw.CrossAxisAlignment.end,
           children: [
+            pw.Padding(
+              padding: const pw.EdgeInsets.only(right: 12, bottom: 2),
+              child: pw.Image(logo, width: 38, height: 38),
+            ),
             pw.Expanded(
               child: pw.Column(
                 crossAxisAlignment: pw.CrossAxisAlignment.start,

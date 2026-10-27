@@ -32,6 +32,7 @@ flutter:
     - assets/fonts/DejaVuSans.ttf
     - assets/fonts/DejaVuSans-Bold.ttf
     - assets/icon/icon.png
+    - assets/icon/logo_mark.png
   fonts:
     - family: Atkinson
       fonts:
