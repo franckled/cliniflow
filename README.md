@@ -63,6 +63,23 @@ signature, et version web publiée sur GitHub Pages
 (https://franckled.github.io/cliniflow/). La publication App Store / Google Play nécessitera d'ajouter les
 secrets de signature.
 
+## Publication iOS (TestFlight)
+
+Workflow `.github/workflows/testflight.yml`, lancé à la main (Actions ›
+TestFlight › Run workflow) ou par un tag `v*`. Il signe l'app avec une clé
+API App Store Connect (signature gérée par Apple, sans certificat à
+manipuler) et envoie le build sur App Store Connect.
+
+Prérequis côté Apple :
+1. Identifiant d'app `fr.cliniflow.app` enregistré (developer.apple.com ›
+   Identifiers).
+2. App créée dans App Store Connect avec cet identifiant.
+3. Clé API App Store Connect avec l'accès **Admin** (nécessaire pour la
+   signature gérée par Apple).
+
+Secrets GitHub : `APPLE_TEAM_ID`, `ASC_KEY_ID`, `ASC_ISSUER_ID`, `ASC_KEY_P8`
+(contenu du fichier `.p8`).
+
 ## Avertissement
 
 CliniFlow est une aide à la décision. La qualification définitive d'une
