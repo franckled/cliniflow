@@ -343,8 +343,8 @@ class _PathwayTab extends StatelessWidget {
         key: ValueKey('station-${item.phase.name}'),
         node: StationNode(complete: item.complete),
         nodeSize: 26,
-        incoming: i == 0 ? null : seg(items[i - 1]),
-        outgoing: last ? null : seg(item),
+        incoming: i == 0 ? null : seg(item),
+        outgoing: last ? null : seg(items[i + 1]),
         child: Padding(
           padding: const EdgeInsets.only(top: 1, bottom: 14, left: 2),
           child: Row(
@@ -370,8 +370,8 @@ class _PathwayTab extends StatelessWidget {
       node: StopNode(s.state),
       nodeSize: 18,
       nodeTop: 3,
-      incoming: seg(items[i - 1]),
-      outgoing: last ? null : seg(s),
+      incoming: seg(s),
+      outgoing: last ? null : seg(items[i + 1]),
       onNodeTap: () => _cycle(s),
       nodeTooltip: '${s.tracking.status.label} – toucher pour passer à '
           '« ${s.tracking.status.next.label} »',
@@ -393,7 +393,8 @@ class _PathwayTab extends StatelessWidget {
     final next = project.nextDeadline();
     final overdue = project.overdueCount(now);
 
-    // Liste à plat : station, arrêts, station, arrêts…
+    // Liste à plat : station, arrêts, station, arrêts… Un tronçon est
+    // parcouru quand le nœud auquel il mène l'est.
     final items = <LineItem>[
       for (final st in stations) ...[st, ...st.stops],
     ];
