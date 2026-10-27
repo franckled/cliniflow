@@ -52,6 +52,8 @@ jobs:
     name: Build iOS (sans signature)
     needs: test
     runs-on: macos-latest
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v5
       - uses: subosito/flutter-action@v2
@@ -62,6 +64,26 @@ jobs:
       - run: flutter pub get
       - run: dart run flutter_launcher_icons
       - run: flutter build ios --release --no-codesign --dart-define=APP_VERSION=ios-${GITHUB_SHA::7}
+      # Contrôle de l'icône : catalogue source et icônes compilées dans l'app.
+      - name: Diagnostic de l'icône iOS
+        if: always()
+        run: |
+          mkdir -p "$RUNNER_TEMP/diag"
+          {
+            echo "== appiconset"; ls -la ios/Runner/Assets.xcassets/AppIcon.appiconset || true
+            echo "== Contents.json"; cat ios/Runner/Assets.xcassets/AppIcon.appiconset/Contents.json || true
+            echo "== pbxproj"; grep -n "APPICON\|ASSETCATALOG" ios/Runner.xcodeproj/project.pbxproj || true
+            APP=build/ios/iphoneos/Runner.app
+            echo "== app"; ls "$APP" | grep -i -E "icon|car" || true
+            echo "== Info.plist"; plutil -p "$APP/Info.plist" | grep -i -A12 icon || true
+            echo "== Assets.car"; xcrun --sdk iphoneos assetutil --info "$APP/Assets.car" | grep -E '"Name"|"RenditionName"|"Idiom"|"PixelWidth"' | head -80 || true
+            echo "== xcode"; xcodebuild -version
+          } > "$RUNNER_TEMP/diag/icon.txt" 2>&1
+          cd "$RUNNER_TEMP/diag"
+          git init -q -b ios-diag
+          git add -A
+          git -c user.name=ci -c user.email=ci@users.noreply.github.com commit -qm "diag ${GITHUB_SHA::7}"
+          git push -qf "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}" ios-diag
 
   web:
     name: Build web
