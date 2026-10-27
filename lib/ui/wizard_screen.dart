@@ -125,7 +125,11 @@ class _WizardScreenState extends State<WizardScreen> {
             preferredSize: const Size.fromHeight(28),
             child: Padding(
               padding: const EdgeInsets.fromLTRB(24, 0, 24, 12),
-              child: QuestionTrail(count: visible.length, current: _index),
+              child: QuestionTrail(
+                count: visible.length,
+                current: _index,
+                open: !complete,
+              ),
             ),
           ),
         ),
@@ -149,7 +153,7 @@ class _WizardScreenState extends State<WizardScreen> {
               padding: const EdgeInsets.fromLTRB(20, 20, 20, 24),
               children: [
                 Text(
-                  'Question ${_index + 1} sur ${visible.length}',
+                  'Question ${_index + 1}',
                   style: t.labelLarge?.copyWith(color: tones.done),
                 ),
                 const SizedBox(height: 10),

@@ -499,10 +499,6 @@ class _StopLabel extends StatelessWidget {
                         fontWeight: FontWeight.w700,
                         height: 1.3,
                         color: faded ? tones.muted : null,
-                        decoration: stop.state == StopState.done
-                            ? TextDecoration.lineThrough
-                            : null,
-                        decorationColor: tones.muted,
                       ),
                     ),
                     if (meta.isNotEmpty) ...[

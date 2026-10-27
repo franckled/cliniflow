@@ -287,45 +287,45 @@ class _MiniLinePainter extends CustomPainter {
     final n = ratios.length;
     final step = n == 1 ? 0.0 : (size.width - 2 * r) / (n - 1);
     final xs = [for (var i = 0; i < n; i++) r + i * step];
-    final stroke = Paint()
-      ..strokeWidth = 3
-      ..strokeCap = StrokeCap.round;
 
-    // Tronçons : parcourus si la station de départ est soldée ; sinon, la
-    // part déjà faite de la station suivante colore le début du tronçon.
-    for (var i = 0; i < n - 1; i++) {
-      final a = xs[i] + r, b = xs[i + 1] - r;
-      canvas.drawLine(Offset(a, y), Offset(b, y), stroke..color = line);
-      final fill = ratios[i] >= 1 ? 1.0 : 0.0;
-      if (fill > 0) {
-        canvas.drawLine(Offset(a, y), Offset(b, y), stroke..color = done);
-      }
+    // Avancement continu : la ligne est parcourue jusqu'aux stations soldées,
+    // puis avance vers la suivante en proportion de la station en cours.
+    final current = ratios.indexWhere((x) => x < 1);
+    final double reach;
+    if (current < 0) {
+      reach = xs.last;
+    } else if (current == n - 1) {
+      reach = xs[current];
+    } else {
+      reach = xs[current] + (xs[current + 1] - xs[current]) * ratios[current];
     }
+
+    final stroke = Paint()
+      ..strokeWidth = 4
+      ..strokeCap = StrokeCap.round;
+    canvas.drawLine(Offset(xs.first, y), Offset(xs.last, y),
+        stroke..color = line);
+    if (reach > xs.first) {
+      canvas.drawLine(
+          Offset(xs.first, y), Offset(reach, y), stroke..color = done);
+    }
+
     for (var i = 0; i < n; i++) {
       final c = Offset(xs[i], y);
-      final ratio = ratios[i];
-      canvas.drawCircle(c, r, Paint()..color = surface);
-      if (ratio >= 1) {
+      if (ratios[i] >= 1) {
         canvas.drawCircle(c, r, Paint()..color = done);
-      } else {
-        if (ratio > 0) {
-          canvas.drawArc(
-            Rect.fromCircle(center: c, radius: r),
-            -1.5708,
-            6.2832 * ratio,
-            true,
-            Paint()..color = done,
-          );
-        }
-        canvas.drawCircle(
-          c,
-          r - 1,
-          Paint()
-            ..style = PaintingStyle.stroke
-            ..strokeWidth = 2
-            ..color = ratio > 0 ? done : ring.withValues(alpha: 0.55),
-        );
+        continue;
       }
+      final isCurrent = i == current;
+      canvas.drawCircle(c, r, Paint()..color = surface);
+      canvas.drawCircle(
+        c,
+        r - 1.25,
+        Paint()
+          ..style = PaintingStyle.stroke
+          ..strokeWidth = isCurrent ? 3 : 2.5
+          ..color = isCurrent ? done : ring.withValues(alpha: 0.45),
+      );
     }
   }
 
@@ -340,17 +340,25 @@ class _MiniLinePainter extends CustomPainter {
 
 /// Fil d'avancement du questionnaire : un point par question visible.
 class QuestionTrail extends StatelessWidget {
-  const QuestionTrail({super.key, required this.count, required this.current});
+  const QuestionTrail({
+    super.key,
+    required this.count,
+    required this.current,
+    this.open = true,
+  });
 
   final int count;
   final int current;
+
+  /// D'autres questions peuvent suivre : la ligne se prolonge en pointillés.
+  final bool open;
 
   @override
   Widget build(BuildContext context) {
     final tones = Tones.of(context);
     final cs = Theme.of(context).colorScheme;
     return Semantics(
-      label: 'Question ${current + 1} sur $count',
+      label: 'Question ${current + 1}',
       child: Row(
         children: [
           for (var i = 0; i < count; i++) ...[
@@ -377,6 +385,17 @@ class QuestionTrail extends StatelessWidget {
                     : null,
               ),
             ),
+          ],
+          if (open) ...[
+            const SizedBox(width: 6),
+            for (var k = 0; k < 3; k++) ...[
+              Container(
+                width: 5,
+                height: 3,
+                color: tones.line,
+              ),
+              const SizedBox(width: 4),
+            ],
           ],
         ],
       ),
