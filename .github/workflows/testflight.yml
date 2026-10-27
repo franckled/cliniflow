@@ -26,6 +26,8 @@ jobs:
     name: Build et envoi TestFlight
     runs-on: macos-latest
     timeout-minutes: 60
+    permissions:
+      contents: write
     env:
       TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
       KEY_ID: ${{ secrets.ASC_KEY_ID }}
@@ -70,9 +72,11 @@ jobs:
         run: |
           BUILD_NUMBER=$((100 + GITHUB_RUN_NUMBER))
           echo "BUILD_NUMBER=$BUILD_NUMBER" >> "$GITHUB_ENV"
+          set -o pipefail
           flutter build ios --release --config-only \
             --build-number "$BUILD_NUMBER" \
-            --dart-define=APP_VERSION=ios-${GITHUB_SHA::7}
+            --dart-define=APP_VERSION=ios-${GITHUB_SHA::7} \
+            2>&1 | tee "$RUNNER_TEMP/prepare.log"
 
       - name: Archiver (signature automatique)
         run: |
@@ -89,7 +93,8 @@ jobs:
             -authenticationKeyIssuerID "$ISSUER_ID" \
             DEVELOPMENT_TEAM="$TEAM_ID" \
             CODE_SIGN_STYLE=Automatic \
-            | tail -n 80
+            2>&1 | tee "$RUNNER_TEMP/archive.log" | grep -E "error|warning: .*sign|BUILD|ARCHIVE" || true
+          grep -q "ARCHIVE SUCCEEDED" "$RUNNER_TEMP/archive.log"
 
       - name: Exporter et envoyer sur App Store Connect
         run: |
@@ -107,6 +112,7 @@ jobs:
           </dict>
           </plist>
           EOF
+          set -o pipefail
           xcodebuild -exportArchive \
             -archivePath "$RUNNER_TEMP/Runner.xcarchive" \
             -exportOptionsPlist "$RUNNER_TEMP/ExportOptions.plist" \
@@ -114,10 +120,27 @@ jobs:
             -allowProvisioningUpdates \
             -authenticationKeyPath "$KEY_PATH" \
             -authenticationKeyID "$KEY_ID" \
-            -authenticationKeyIssuerID "$ISSUER_ID"
+            -authenticationKeyIssuerID "$ISSUER_ID" \
+            2>&1 | tee "$RUNNER_TEMP/export.log"
           echo "### Build $BUILD_NUMBER envoyé sur App Store Connect" >> "$GITHUB_STEP_SUMMARY"
           echo "Il apparaît dans TestFlight après le traitement par Apple (10 à 30 min)." >> "$GITHUB_STEP_SUMMARY"
 
       - name: Supprimer la clé
         if: always()
         run: rm -rf "$RUNNER_TEMP/keys"
+
+      # En cas d'échec, les journaux (sans secret) sont déposés dans la branche
+      # ci-logs pour pouvoir être lus hors de GitHub.
+      - name: Publier les journaux d'échec
+        if: failure()
+        run: |
+          mkdir -p "$RUNNER_TEMP/logs"
+          for f in prepare archive export; do
+            [ -f "$RUNNER_TEMP/$f.log" ] && tail -n 400 "$RUNNER_TEMP/$f.log" > "$RUNNER_TEMP/logs/$f.log"
+          done
+          echo "run ${GITHUB_RUN_ID} ${GITHUB_SHA::7}" > "$RUNNER_TEMP/logs/README"
+          cd "$RUNNER_TEMP/logs"
+          git init -q -b ci-logs
+          git add -A
+          git -c user.name=ci -c user.email=ci@users.noreply.github.com commit -qm "logs ${GITHUB_RUN_ID}"
+          git push -qf "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}" ci-logs
