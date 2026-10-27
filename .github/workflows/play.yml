@@ -21,6 +21,8 @@ jobs:
     name: App bundle signé
     runs-on: ubuntu-latest
     timeout-minutes: 40
+    permissions:
+      contents: write
     steps:
       - name: Vérifier les secrets
         env:
@@ -62,16 +64,18 @@ jobs:
           storeFile=$RUNNER_TEMP/upload.jks
           EOF
           keytool -list -keystore "$RUNNER_TEMP/upload.jks" -storepass "$PW" -alias upload > /dev/null
-          python3 tool/android_signing.py
+          python3 tool/android_signing.py 2>&1 | tee "$RUNNER_TEMP/signing.log"
 
       # Code de version unique et croissant, exigé par Google Play.
       - name: Compiler l'app bundle
         run: |
           BUILD_NUMBER=$((100 + GITHUB_RUN_NUMBER))
           echo "BUILD_NUMBER=$BUILD_NUMBER" >> "$GITHUB_ENV"
+          set -o pipefail
           flutter build appbundle --release \
             --build-number "$BUILD_NUMBER" \
-            --dart-define=APP_VERSION=android-${GITHUB_SHA::7}
+            --dart-define=APP_VERSION=android-${GITHUB_SHA::7} \
+            2>&1 | tee "$RUNNER_TEMP/build.log"
           AAB=build/app/outputs/bundle/release/app-release.aab
           # Contrôle : le bundle doit être signé avec la clé d'envoi.
           keytool -printcert -jarfile "$AAB" | grep -q "Unite de Recherche Clinique"
@@ -95,3 +99,18 @@ jobs:
       - name: Nettoyer
         if: always()
         run: rm -f "$RUNNER_TEMP/upload.jks" android/key.properties
+
+      - name: Publier les journaux d'échec
+        if: failure()
+        run: |
+          mkdir -p "$RUNNER_TEMP/logs"
+          for f in signing build; do
+            [ -f "$RUNNER_TEMP/$f.log" ] && tail -n 300 "$RUNNER_TEMP/$f.log" > "$RUNNER_TEMP/logs/$f.log"
+          done
+          cp android/app/build.gradle.kts "$RUNNER_TEMP/logs/" 2>/dev/null || true
+          echo "play ${GITHUB_RUN_ID} ${GITHUB_SHA::7}" > "$RUNNER_TEMP/logs/README"
+          cd "$RUNNER_TEMP/logs"
+          git init -q -b ci-logs
+          git add -A
+          git -c user.name=ci -c user.email=ci@users.noreply.github.com commit -qm "logs ${GITHUB_RUN_ID}"
+          git push -qf "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}" ci-logs
