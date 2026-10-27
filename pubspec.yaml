@@ -31,6 +31,18 @@ flutter:
   assets:
     - assets/fonts/DejaVuSans.ttf
     - assets/fonts/DejaVuSans-Bold.ttf
+    - assets/icon/icon.png
+  fonts:
+    - family: Atkinson
+      fonts:
+        - asset: assets/fonts/AtkinsonHyperlegibleNext-400.ttf
+          weight: 400
+        - asset: assets/fonts/AtkinsonHyperlegibleNext-500.ttf
+          weight: 500
+        - asset: assets/fonts/AtkinsonHyperlegibleNext-700.ttf
+          weight: 700
+        - asset: assets/fonts/AtkinsonHyperlegibleNext-800.ttf
+          weight: 800
 
 flutter_launcher_icons:
   image_path: assets/icon/icon.png

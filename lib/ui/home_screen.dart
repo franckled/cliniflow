@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../data/project.dart';
 import '../data/project_store.dart';
 import 'about_screen.dart';
+import 'line.dart';
 import 'project_screen.dart';
 import 'theme.dart';
 import 'wizard_screen.dart';
@@ -16,7 +17,6 @@ class HomeScreen extends StatelessWidget {
     final created = await showModalBottomSheet<Project>(
       context: context,
       isScrollControlled: true,
-      showDragHandle: true,
       builder: (_) => _NewProjectSheet(store: store),
     );
     if (created == null || !context.mounted) return;
@@ -54,78 +54,194 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('CliniFlow'),
-        actions: [
-          IconButton(
-            tooltip: 'À propos',
-            icon: const Icon(Icons.info_outline),
-            onPressed: () => Navigator.of(context).push(
-              MaterialPageRoute(builder: (_) => const AboutScreen()),
-            ),
+    return ListenableBuilder(
+      listenable: store,
+      builder: (context, _) {
+        final projects = store.projects;
+        final now = DateTime.now();
+        return Scaffold(
+          appBar: AppBar(
+            titleSpacing: 20,
+            title: const _Brand(),
+            actions: [
+              IconButton(
+                tooltip: 'À propos',
+                icon: const Icon(Icons.info_outline_rounded),
+                onPressed: () => Navigator.of(context).push(
+                  MaterialPageRoute(builder: (_) => const AboutScreen()),
+                ),
+              ),
+              const SizedBox(width: 8),
+            ],
           ),
-        ],
-      ),
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () => _newProject(context),
-        icon: const Icon(Icons.add),
-        label: const Text('Nouveau projet'),
-      ),
-      body: ListenableBuilder(
-        listenable: store,
-        builder: (context, _) {
-          final projects = store.projects;
-          if (projects.isEmpty) return const _EmptyState();
-          final now = DateTime.now();
-          return ListView.separated(
-            padding: const EdgeInsets.fromLTRB(16, 8, 16, 96),
-            itemCount: projects.length,
-            separatorBuilder: (_, _) => const SizedBox(height: 12),
-            itemBuilder: (context, i) => _ProjectCard(
-              project: projects[i],
-              now: now,
-              onTap: () => _open(context, projects[i]),
-            ),
-          );
-        },
-      ),
+          floatingActionButton: projects.isEmpty
+              ? null
+              : FloatingActionButton.extended(
+                  onPressed: () => _newProject(context),
+                  icon: const Icon(Icons.add_rounded),
+                  label: const Text('Nouvelle recherche'),
+                ),
+          body: projects.isEmpty
+              ? _EmptyState(onStart: () => _newProject(context))
+              : ListView(
+                  padding: const EdgeInsets.fromLTRB(20, 4, 20, 112),
+                  children: [
+                    _Header(projects: projects, now: now),
+                    const SizedBox(height: 20),
+                    for (final p in projects) ...[
+                      _ProjectCard(
+                        project: p,
+                        now: now,
+                        onTap: () => _open(context, p),
+                      ),
+                      const SizedBox(height: 14),
+                    ],
+                  ],
+                ),
+        );
+      },
+    );
+  }
+}
+
+class _Brand extends StatelessWidget {
+  const _Brand();
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        ClipRRect(
+          borderRadius: BorderRadius.circular(8),
+          child: Image.asset('assets/icon/icon.png', width: 30, height: 30),
+        ),
+        const SizedBox(width: 10),
+        Text('CliniFlow',
+            style: Theme.of(context)
+                .textTheme
+                .titleLarge
+                ?.copyWith(fontWeight: FontWeight.w800)),
+      ],
+    );
+  }
+}
+
+class _Header extends StatelessWidget {
+  const _Header({required this.projects, required this.now});
+
+  final List<Project> projects;
+  final DateTime now;
+
+  @override
+  Widget build(BuildContext context) {
+    final t = Theme.of(context).textTheme;
+    final tones = Tones.of(context);
+    final overdue = projects.fold<int>(0, (n, p) => n + p.overdueCount(now));
+    final count = projects.length;
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text('Mes recherches', style: t.headlineMedium),
+        const SizedBox(height: 6),
+        Text.rich(
+          TextSpan(children: [
+            TextSpan(text: count == 1 ? '1 projet suivi' : '$count projets suivis'),
+            if (overdue > 0) ...[
+              const TextSpan(text: ', '),
+              TextSpan(
+                text: overdue == 1
+                    ? '1 démarche en retard'
+                    : '$overdue démarches en retard',
+                style: TextStyle(
+                  color: tones.overdue,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
+            ],
+          ]),
+          style: t.bodyMedium?.copyWith(color: tones.muted),
+        ),
+      ],
     );
   }
 }
 
 class _EmptyState extends StatelessWidget {
-  const _EmptyState();
+  const _EmptyState({required this.onStart});
+
+  final VoidCallback onStart;
 
   @override
   Widget build(BuildContext context) {
     final t = Theme.of(context).textTheme;
-    final cs = Theme.of(context).colorScheme;
-    return Center(
-      child: SingleChildScrollView(
-        padding: const EdgeInsets.all(32),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Icon(Icons.route_outlined, size: 64, color: cs.primary),
-            const SizedBox(height: 16),
-            Text('Du protocole à la première inclusion',
-                style: t.titleLarge, textAlign: TextAlign.center),
-            const SizedBox(height: 12),
-            Text(
-              'Qualifiez votre recherche en quelques questions, puis suivez '
-              'pas à pas les démarches : CPP, ANSM, CNIL, assurance, '
-              'déclarations.',
-              style: t.bodyMedium?.copyWith(color: cs.onSurfaceVariant),
-              textAlign: TextAlign.center,
+    final tones = Tones.of(context);
+
+    Widget station(String title, String text,
+            {Color? incoming, Color? outgoing, bool first = false}) =>
+        LineRow(
+          node: StationNode(complete: first),
+          nodeSize: 26,
+          incoming: incoming,
+          outgoing: outgoing,
+          child: Padding(
+            padding: const EdgeInsets.only(bottom: 26, top: 1),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(title, style: t.titleMedium),
+                const SizedBox(height: 4),
+                Text(text, style: t.bodyMedium?.copyWith(color: tones.muted)),
+              ],
             ),
-            const SizedBox(height: 8),
-            Text(
-              'Vos projets restent sur cet appareil.',
-              style: t.bodySmall?.copyWith(color: cs.onSurfaceVariant),
-            ),
-          ],
-        ),
+          ),
+        );
+
+    return SafeArea(
+      child: ListView(
+        padding: const EdgeInsets.fromLTRB(20, 12, 20, 32),
+        children: [
+          Text('Du protocole\nà la première inclusion',
+              style: t.displaySmall),
+          const SizedBox(height: 14),
+          Text(
+            'Qualifiez votre recherche en quelques questions, puis suivez '
+            'chaque démarche jusqu\'à la clôture.',
+            style: t.bodyLarge?.copyWith(color: tones.muted),
+          ),
+          const SizedBox(height: 32),
+          station('Qualifier',
+              'RIPH 1, 2 ou 3, essai de médicament, dispositif médical, '
+              'recherche sur données.',
+              outgoing: tones.done, first: true),
+          station('Déposer', 'CPP, ANSM, CNIL, assurance : chaque pièce, '
+              'dans l\'ordre.',
+              incoming: tones.done, outgoing: tones.line),
+          station('Conduire et clôturer',
+              'Modifications, vigilance, fin de recherche, résultats.',
+              incoming: tones.line),
+          const SizedBox(height: 8),
+          FilledButton.icon(
+            onPressed: onStart,
+            icon: const Icon(Icons.add_rounded),
+            label: const Text('Qualifier une recherche'),
+          ),
+          const SizedBox(height: 16),
+          Row(
+            children: [
+              Icon(Icons.lock_outline_rounded, size: 16, color: tones.muted),
+              const SizedBox(width: 8),
+              Expanded(
+                child: Text(
+                  'Vos projets restent sur cet appareil. Aucun compte, '
+                  'aucun serveur.',
+                  style: t.bodySmall?.copyWith(color: tones.muted),
+                ),
+              ),
+            ],
+          ),
+          SizedBox(height: MediaQuery.paddingOf(context).bottom),
+        ],
       ),
     );
   }
@@ -145,70 +261,86 @@ class _ProjectCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final t = Theme.of(context).textTheme;
+    final tones = Tones.of(context);
     final cs = Theme.of(context).colorScheme;
     final c = project.classification;
     final progress = project.progress;
     final overdue = project.overdueCount(now);
     final next = project.nextDeadline();
+    final showTitle = project.acronym.isNotEmpty && project.title.isNotEmpty;
 
     return Card(
       clipBehavior: Clip.antiAlias,
       child: InkWell(
         onTap: onTap,
         child: Padding(
-          padding: const EdgeInsets.all(16),
+          padding: const EdgeInsets.fromLTRB(18, 16, 18, 16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(project.displayName,
-                  style: t.titleMedium?.copyWith(fontWeight: FontWeight.w700)),
-              if (project.acronym.isNotEmpty && project.title.isNotEmpty)
-                Padding(
-                  padding: const EdgeInsets.only(top: 2),
-                  child: Text(
-                    project.title,
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                    style: t.bodyMedium?.copyWith(color: cs.onSurfaceVariant),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Expanded(
+                    child: Text(
+                      project.displayName,
+                      style: t.titleLarge?.copyWith(fontWeight: FontWeight.w800),
+                    ),
                   ),
+                  Icon(Icons.chevron_right_rounded, color: tones.muted),
+                ],
+              ),
+              if (showTitle) ...[
+                const SizedBox(height: 2),
+                Text(
+                  project.title,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                  style: t.bodyMedium?.copyWith(color: tones.muted),
                 ),
-              const SizedBox(height: 12),
+              ],
+              const SizedBox(height: 14),
               if (c == null)
-                Row(children: [
-                  Icon(Icons.edit_note, size: 18, color: cs.primary),
-                  const SizedBox(width: 6),
-                  Text('Qualification à terminer',
-                      style: t.labelLarge?.copyWith(color: cs.primary)),
-                ])
+                Container(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+                  decoration: BoxDecoration(
+                    color: cs.primaryContainer,
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Row(children: [
+                    Icon(Icons.play_arrow_rounded,
+                        size: 20, color: cs.onPrimaryContainer),
+                    const SizedBox(width: 8),
+                    Text('Reprendre la qualification',
+                        style: t.labelLarge
+                            ?.copyWith(color: cs.onPrimaryContainer)),
+                  ]),
+                )
               else ...[
                 CategoryBadge(c.category, dense: true),
-                const SizedBox(height: 12),
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(4),
-                  child: LinearProgressIndicator(
-                    value: progress.total == 0
-                        ? 0
-                        : progress.done / progress.total,
-                    minHeight: 6,
-                  ),
-                ),
-                const SizedBox(height: 8),
+                const SizedBox(height: 16),
+                MiniLine(stations: stationsOf(project, now)),
+                const SizedBox(height: 10),
                 Row(
                   children: [
-                    Text('${progress.done}/${progress.total} étapes',
-                        style: t.bodySmall),
+                    Text(
+                      '${progress.done} démarche${progress.done > 1 ? 's' : ''} '
+                      'sur ${progress.total}',
+                      style: t.labelMedium?.copyWith(color: tones.muted),
+                    ),
                     const Spacer(),
                     if (overdue > 0)
                       Text(
                         overdue == 1 ? '1 en retard' : '$overdue en retard',
-                        style: t.bodySmall?.copyWith(
-                          color: cs.error,
-                          fontWeight: FontWeight.w600,
+                        style: t.labelMedium?.copyWith(
+                          color: tones.overdue,
+                          fontWeight: FontWeight.w700,
                         ),
                       )
                     else if (next != null)
-                      Text('Échéance ${formatDate(next.due)}',
-                          style: t.bodySmall),
+                      Text('Échéance le ${formatDate(next.due)}',
+                          style: t.labelMedium?.copyWith(color: tones.muted)),
                   ],
                 ),
               ],
@@ -281,6 +413,8 @@ class _NewProjectSheetState extends State<_NewProjectSheet> {
 
   @override
   Widget build(BuildContext context) {
+    final t = Theme.of(context).textTheme;
+    final tones = Tones.of(context);
     return Padding(
       padding: EdgeInsets.fromLTRB(
         20,
@@ -292,17 +426,27 @@ class _NewProjectSheetState extends State<_NewProjectSheet> {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Text('Nouveau projet', style: Theme.of(context).textTheme.titleLarge),
-          const SizedBox(height: 16),
+          Text('Nouvelle recherche', style: t.headlineSmall),
+          const SizedBox(height: 6),
+          Text('L\'acronyme ou le titre suffit pour commencer.',
+              style: t.bodyMedium?.copyWith(color: tones.muted)),
+          const SizedBox(height: 20),
           TextField(
             controller: _acronym,
+            autofocus: true,
             textCapitalization: TextCapitalization.characters,
-            decoration: const InputDecoration(labelText: 'Acronyme'),
+            textInputAction: TextInputAction.next,
+            style: t.titleMedium,
+            decoration: const InputDecoration(
+              labelText: 'Acronyme',
+              hintText: 'Ex. CAMPANILE',
+            ),
           ),
           const SizedBox(height: 12),
           TextField(
             controller: _title,
             textCapitalization: TextCapitalization.sentences,
+            textInputAction: TextInputAction.next,
             minLines: 1,
             maxLines: 3,
             decoration: const InputDecoration(labelText: 'Titre de l\'étude'),
@@ -310,11 +454,14 @@ class _NewProjectSheetState extends State<_NewProjectSheet> {
           const SizedBox(height: 12),
           TextField(
             controller: _sponsor,
+            textInputAction: TextInputAction.done,
+            onSubmitted: (_) => _submit(),
             decoration: const InputDecoration(
-              labelText: 'Promoteur (facultatif)',
+              labelText: 'Promoteur',
+              helperText: 'Facultatif : DRCI, établissement, industriel…',
             ),
           ),
-          const SizedBox(height: 20),
+          const SizedBox(height: 22),
           FilledButton.icon(
             onPressed: _valid && !_busy ? _submit : null,
             icon: _busy
@@ -322,7 +469,7 @@ class _NewProjectSheetState extends State<_NewProjectSheet> {
                     dimension: 18,
                     child: CircularProgressIndicator(strokeWidth: 2),
                   )
-                : const Icon(Icons.arrow_forward),
+                : const Icon(Icons.arrow_forward_rounded),
             label: const Text('Qualifier la recherche'),
           ),
         ],

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../data/project_store.dart';
 import '../engine/engine.dart';
+import 'line.dart';
+import 'theme.dart';
 
 /// Questionnaire de qualification, une question par écran.
 /// Retourne `true` au `pop` si la qualification est terminée.
@@ -94,7 +96,7 @@ class _WizardScreenState extends State<WizardScreen> {
     final q = _current;
     final visible = _visible;
     final t = Theme.of(context).textTheme;
-    final cs = Theme.of(context).colorScheme;
+    final tones = Tones.of(context);
     final selected = _answers[q.id];
     final complete = isComplete(_answers);
 
@@ -107,51 +109,57 @@ class _WizardScreenState extends State<WizardScreen> {
         appBar: AppBar(
           leading: IconButton(
             tooltip: 'Fermer',
-            icon: const Icon(Icons.close),
+            icon: const Icon(Icons.close_rounded),
             onPressed: () => Navigator.of(context).pop(complete),
           ),
-          title: const Text('Qualification'),
+          title: Text('Qualification', style: t.titleMedium),
           actions: [
             if (complete)
               TextButton(
                 onPressed: () => Navigator.of(context).pop(true),
-                child: const Text('Résultat'),
+                child: const Text('Voir le résultat'),
               ),
+            const SizedBox(width: 8),
           ],
           bottom: PreferredSize(
-            preferredSize: const Size.fromHeight(4),
-            child: LinearProgressIndicator(
-              value: (_index + 1) / visible.length,
-              minHeight: 4,
+            preferredSize: const Size.fromHeight(28),
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(24, 0, 24, 12),
+              child: QuestionTrail(count: visible.length, current: _index),
             ),
           ),
         ),
         body: SafeArea(
           child: AnimatedSwitcher(
-            duration: const Duration(milliseconds: 220),
+            duration: const Duration(milliseconds: 260),
+            switchInCurve: Curves.easeOutCubic,
+            switchOutCurve: Curves.easeInCubic,
+            transitionBuilder: (child, anim) => FadeTransition(
+              opacity: anim,
+              child: SlideTransition(
+                position: Tween(
+                  begin: const Offset(0.06, 0),
+                  end: Offset.zero,
+                ).animate(anim),
+                child: child,
+              ),
+            ),
             child: ListView(
               key: ValueKey(q.id),
-              padding: const EdgeInsets.fromLTRB(20, 24, 20, 24),
+              padding: const EdgeInsets.fromLTRB(20, 20, 20, 24),
               children: [
                 Text(
                   'Question ${_index + 1} sur ${visible.length}',
-                  style: t.labelLarge?.copyWith(color: cs.primary),
+                  style: t.labelLarge?.copyWith(color: tones.done),
                 ),
-                const SizedBox(height: 8),
-                Text(q.title,
-                    style: t.headlineSmall?.copyWith(
-                      fontWeight: FontWeight.w700,
-                      height: 1.2,
-                    )),
+                const SizedBox(height: 10),
+                Text(q.title, style: t.headlineSmall),
                 if (q.help != null) ...[
                   const SizedBox(height: 12),
                   Text(q.help!,
-                      style: t.bodyMedium?.copyWith(
-                        color: cs.onSurfaceVariant,
-                        height: 1.4,
-                      )),
+                      style: t.bodyMedium?.copyWith(color: tones.muted)),
                 ],
-                const SizedBox(height: 20),
+                const SizedBox(height: 24),
                 for (final c in q.choices) ...[
                   _ChoiceTile(
                     choice: c,
@@ -178,12 +186,12 @@ class _WizardScreenState extends State<WizardScreen> {
           ),
         ),
         bottomNavigationBar: SafeArea(
-          minimum: const EdgeInsets.fromLTRB(16, 0, 16, 12),
+          minimum: const EdgeInsets.fromLTRB(12, 0, 20, 12),
           child: Row(
             children: [
               TextButton.icon(
                 onPressed: _back,
-                icon: const Icon(Icons.arrow_back),
+                icon: const Icon(Icons.arrow_back_rounded),
                 label: const Text('Précédent'),
               ),
               const Spacer(),
@@ -222,66 +230,89 @@ class _ChoiceTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final cs = Theme.of(context).colorScheme;
     final t = Theme.of(context).textTheme;
+    final tones = Tones.of(context);
+    final shape = RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(16),
+      side: BorderSide(
+        color: selected ? cs.onSurface : cs.outlineVariant,
+        width: selected ? 2 : 1,
+      ),
+    );
     return Semantics(
       selected: selected,
       button: true,
-      child: Material(
-        color: selected ? cs.primaryContainer : cs.surfaceContainerLow,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(14),
-          side: BorderSide(
-            color: selected ? cs.primary : cs.outlineVariant,
-            width: selected ? 1.5 : 1,
-          ),
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 180),
+        decoration: ShapeDecoration(
+          shape: shape,
+          color: selected ? tones.doneSoft : tones.raised,
         ),
-        clipBehavior: Clip.antiAlias,
-        child: InkWell(
-          onTap: onTap,
-          child: Padding(
-            padding: const EdgeInsets.fromLTRB(14, 14, 16, 14),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Icon(
-                  multiple
-                      ? (selected
-                          ? Icons.check_box
-                          : Icons.check_box_outline_blank)
-                      : (selected
-                          ? Icons.radio_button_checked
-                          : Icons.radio_button_unchecked),
-                  color: selected ? cs.primary : cs.onSurfaceVariant,
-                ),
-                const SizedBox(width: 12),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(choice.label,
-                          style: t.bodyLarge?.copyWith(
-                            fontWeight:
-                                selected ? FontWeight.w600 : FontWeight.w500,
-                            color: selected
-                                ? cs.onPrimaryContainer
-                                : cs.onSurface,
-                          )),
-                      if (choice.hint != null) ...[
-                        const SizedBox(height: 4),
-                        Text(choice.hint!,
-                            style: t.bodySmall?.copyWith(
-                              color: selected
-                                  ? cs.onPrimaryContainer
-                                  : cs.onSurfaceVariant,
+        child: Material(
+          type: MaterialType.transparency,
+          shape: shape,
+          clipBehavior: Clip.antiAlias,
+          child: InkWell(
+            onTap: onTap,
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(16, 16, 16, 16),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(choice.label,
+                            style: t.bodyLarge?.copyWith(
+                              fontWeight: FontWeight.w700,
+                              height: 1.3,
                             )),
+                        if (choice.hint != null) ...[
+                          const SizedBox(height: 4),
+                          Text(choice.hint!,
+                              style:
+                                  t.bodySmall?.copyWith(color: tones.muted)),
+                        ],
                       ],
-                    ],
+                    ),
                   ),
-                ),
-              ],
+                  const SizedBox(width: 12),
+                  _Mark(selected: selected, multiple: multiple),
+                ],
+              ),
             ),
           ),
         ),
       ),
+    );
+  }
+}
+
+/// Repère de sélection : rond pour un choix unique, carré pour plusieurs.
+class _Mark extends StatelessWidget {
+  const _Mark({required this.selected, required this.multiple});
+
+  final bool selected;
+  final bool multiple;
+
+  @override
+  Widget build(BuildContext context) {
+    final tones = Tones.of(context);
+    final cs = Theme.of(context).colorScheme;
+    final radius = multiple ? BorderRadius.circular(6) : null;
+    return AnimatedContainer(
+      duration: const Duration(milliseconds: 180),
+      width: 24,
+      height: 24,
+      decoration: BoxDecoration(
+        shape: multiple ? BoxShape.rectangle : BoxShape.circle,
+        borderRadius: radius,
+        color: selected ? tones.done : Colors.transparent,
+        border: selected ? null : Border.all(color: tones.muted, width: 2),
+      ),
+      child: selected
+          ? Icon(Icons.check_rounded, size: 17, color: cs.surface)
+          : null,
     );
   }
 }

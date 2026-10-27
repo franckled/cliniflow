@@ -67,6 +67,8 @@ jobs:
     name: Build web
     needs: test
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v5
       - uses: subosito/flutter-action@v2
@@ -80,6 +82,7 @@ jobs:
           flutter build web --release
           --base-href "/${{ github.event.repository.name }}/"
           --dart-define=APP_VERSION=web-${GITHUB_SHA::7}
+          --no-web-resources-cdn
       # Chaque version remplace l'ancienne sans délai : pas de service worker
       # ni de cache navigateur sur le point d'entrée.
       - run: python3 tool/web_no_cache.py build/web "${GITHUB_SHA::7}"
@@ -88,6 +91,17 @@ jobs:
       - uses: actions/upload-pages-artifact@v4
         with:
           path: build/web
+      # Copie de la version web dans une branche, pour les captures d'écran
+      # de contrôle prises hors de GitHub.
+      - name: Publier l'aperçu dans la branche web-preview
+        if: github.event_name == 'push'
+        run: |
+          cd build/web
+          git init -q -b web-preview
+          git add -A
+          git -c user.name=ci -c user.email=ci@users.noreply.github.com \
+            commit -qm "web ${GITHUB_SHA::7}"
+          git push -qf "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}" web-preview
 
   deploy-web:
     name: Publier sur GitHub Pages
