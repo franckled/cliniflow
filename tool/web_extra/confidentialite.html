@@ -1,58 +1,94 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>CliniFlow – Politique de confidentialité</title>
-<style>
-  :root { --ink:#12324A; --paper:#F2F5F7; --muted:#5B6B78; --mint:#1F8F78; }
-  @media (prefers-color-scheme: dark) { :root { --ink:#E4ECF1; --paper:#0D1C27; --muted:#9CB0BF; --mint:#7ED6C5; } }
-  body { margin:0; background:var(--paper); color:var(--ink);
-         font: 17px/1.55 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
-  main { max-width: 680px; margin: 0 auto; padding: 40px 20px 64px; }
-  h1 { font-size: 30px; line-height: 1.15; margin: 0 0 6px; }
-  h2 { font-size: 19px; margin: 32px 0 6px; }
-  p, li { color: var(--ink); }
-  .muted { color: var(--muted); font-size: 15px; }
-  .credit { border-left: 3px solid var(--mint); padding-left: 12px; margin-top: 40px; color: var(--muted); font-size: 15px; }
-  a { color: var(--mint); }
-</style>
-</head>
-<body>
-<main>
-  <h1>Politique de confidentialité</h1>
-  <p class="muted">CliniFlow – mise à jour le 27 octobre 2026</p>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Politique de Confidentialité — CliniFlow</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #0f2b48;
+      --primary-light: #1a3e66;
+      --accent: #10b981;
+      --accent-bg: #e6f7f2;
+      --bg-body: #f8fafc;
+      --card-bg: #ffffff;
+      --text-main: #1e293b;
+      --text-muted: #64748b;
+      --border: #e2e8f0;
+      --radius: 16px;
+      --shadow: 0 10px 25px -5px rgba(15, 43, 72, 0.05), 0 8px 10px -6px rgba(15, 43, 72, 0.03);
+    }
 
-  <h2>En bref</h2>
-  <p>CliniFlow ne collecte, ne transmet et ne vend aucune donnée personnelle.
-  L'application fonctionne sans compte, sans serveur et sans outil de mesure
-  d'audience.</p>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-  <h2>Données saisies</h2>
-  <p>Les informations que vous saisissez (acronyme, titre et promoteur d'une
-  recherche, réponses au questionnaire, statut des démarches, échéances et
-  notes) sont enregistrées uniquement sur votre appareil, ou dans votre
-  navigateur pour la version web. Elles ne quittent jamais l'appareil, sauf si
-  vous choisissez vous-même de partager la fiche PDF générée.</p>
-  <p>CliniFlow n'est pas conçu pour recevoir des données de santé : ne saisissez
-  aucune information permettant d'identifier un patient.</p>
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--bg-body);
+      color: var(--text-main);
+      line-height: 1.6;
+      padding: 2rem 1rem;
+    }
 
-  <h2>Suppression</h2>
-  <p>Vous pouvez supprimer un projet à tout moment depuis l'application.
-  Supprimer l'application (ou effacer les données du site dans le navigateur)
-  efface l'ensemble des projets.</p>
+    .container {
+      max-width: 860px;
+      margin: 0 auto;
+    }
 
-  <h2>Liens externes</h2>
-  <p>L'application propose des liens vers des sources officielles (ANSM, CNIL,
-  Légifrance, etc.). Ces sites appliquent leur propre politique de
-  confidentialité.</p>
+    /* Header */
+    header {
+      text-align: center;
+      margin-bottom: 2.5rem;
+      padding: 2rem 1rem;
+    }
 
-  <h2>Contact</h2>
-  <p>Pour toute question, contactez l'Unité de Recherche Clinique du Centre
-  Hospitalier de Bastia.</p>
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 1rem;
+    }
 
-  <p class="credit"><strong>Dr Franck LE DUFF</strong><br>
-  Centre Hospitalier de Bastia<br>Unité de Recherche Clinique</p>
-</main>
-</body>
-</html>
+    .brand-icon {
+      width: 44px;
+      height: 44px;
+      background: var(--primary);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+    }
+
+    .brand-name {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--primary);
+      letter-spacing: -0.5px;
+    }
+
+    h1 {
+      font-size: 2.2rem;
+      color: var(--primary);
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .update-date {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    /* Key Summary Banner */
+    .highlight-card {
+      background: linear-gradient(135deg, #0f2b48 0%, #1a3e66 100%);
+      color: white;
+      border-radius: var(--radius);
+      padding: 2rem;
+      margin-bottom: 2rem
