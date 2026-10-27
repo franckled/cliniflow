@@ -7,6 +7,7 @@ import 'package:printing/printing.dart';
 
 import '../data/project.dart';
 import '../engine/engine.dart';
+import '../ui/credit.dart' show Credit;
 
 const _ink = PdfColor.fromInt(0xFF12324A);
 const _muted = PdfColor.fromInt(0xFF5B6670);
@@ -93,17 +94,29 @@ Future<Uint8List> buildSummaryPdf(Project p, {DateTime? now}) async {
       theme: pw.ThemeData.withFont(base: regular, bold: bold).copyWith(
             defaultTextStyle: const pw.TextStyle(fontSize: 9.5, color: _ink),
           ),
-      footer: (ctx) => pw.Row(
+      footer: (ctx) => pw.Column(
+        crossAxisAlignment: pw.CrossAxisAlignment.start,
         children: [
-          pw.Expanded(
-            child: pw.Text(
-              'Aide à la décision – la qualification définitive relève du '
-              'promoteur et, le cas échéant, du CPP.',
-              style: const pw.TextStyle(fontSize: 7.5, color: _muted),
-            ),
+          pw.Text(Credit.oneLine,
+              style: pw.TextStyle(
+                fontSize: 7.5,
+                color: _ink,
+                fontWeight: pw.FontWeight.bold,
+              )),
+          pw.SizedBox(height: 2),
+          pw.Row(
+            children: [
+              pw.Expanded(
+                child: pw.Text(
+                  'Aide à la décision – la qualification définitive relève du '
+                  'promoteur et, le cas échéant, du CPP.',
+                  style: const pw.TextStyle(fontSize: 7.5, color: _muted),
+                ),
+              ),
+              pw.Text('${ctx.pageNumber}/${ctx.pagesCount}',
+                  style: const pw.TextStyle(fontSize: 7.5, color: _muted)),
+            ],
           ),
-          pw.Text('${ctx.pageNumber}/${ctx.pagesCount}',
-              style: const pw.TextStyle(fontSize: 7.5, color: _muted)),
         ],
       ),
       build: (ctx) => [

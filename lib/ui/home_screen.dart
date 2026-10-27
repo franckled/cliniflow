@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../data/project.dart';
 import '../data/project_store.dart';
 import 'about_screen.dart';
+import 'credit.dart';
 import 'line.dart';
 import 'project_screen.dart';
 import 'theme.dart';
@@ -96,6 +97,7 @@ class HomeScreen extends StatelessWidget {
                       ),
                       const SizedBox(height: 14),
                     ],
+                    const CreditLine(padding: EdgeInsets.only(top: 14)),
                   ],
                 ),
         );
@@ -240,6 +242,7 @@ class _EmptyState extends StatelessWidget {
               ),
             ],
           ),
+          const CreditLine(),
           SizedBox(height: MediaQuery.paddingOf(context).bottom),
         ],
       ),

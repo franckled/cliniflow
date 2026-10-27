@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'credit.dart';
+
 /// Version affichée, injectée à la compilation (--dart-define=APP_VERSION=…).
 const appVersion = String.fromEnvironment('APP_VERSION', defaultValue: 'dev');
 
@@ -34,6 +36,7 @@ class AboutScreen extends StatelessWidget {
           const SizedBox(height: 4),
           Text('Qualifier une recherche clinique et en suivre les démarches.',
               style: t.bodyMedium?.copyWith(color: cs.onSurfaceVariant)),
+          const CreditLine(padding: EdgeInsets.only(top: 16)),
           const SizedBox(height: 24),
           section(
             'Ce que couvre l\'application',

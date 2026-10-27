@@ -5,6 +5,7 @@ import '../data/project.dart';
 import '../data/project_store.dart';
 import '../engine/engine.dart';
 import '../pdf/summary_pdf.dart';
+import 'credit.dart';
 import 'line.dart';
 import 'theme.dart';
 import 'wizard_screen.dart';
@@ -270,6 +271,7 @@ class _QualificationTab extends StatelessWidget {
           'relève du promoteur et, le cas échéant, du CPP saisi.',
           style: t.bodySmall?.copyWith(color: tones.muted),
         ),
+        const CreditLine(),
       ],
     );
   }
@@ -846,6 +848,7 @@ class _SummaryTabState extends State<_SummaryTab> {
           icon: const Icon(Icons.print_outlined),
           label: const Text('Aperçu et impression'),
         ),
+        const CreditLine(),
       ],
     );
   }
