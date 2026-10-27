@@ -6,9 +6,9 @@ import 'theme.dart';
 /// et en pied de page de la fiche PDF.
 abstract final class Credit {
   static const author = 'Dr Franck LE DUFF';
-  static const structure =
-      'Centre Hospitalier de Bastia – Unité de Recherche Clinique';
-  static const oneLine = '$author – $structure';
+  static const hospital = 'Centre Hospitalier de Bastia';
+  static const unit = 'Unité de Recherche Clinique';
+  static const oneLine = '$author – $hospital – $unit';
 }
 
 /// Mention d'auteur, discrète, en bas de page.
@@ -31,7 +31,7 @@ class CreditLine extends StatelessWidget {
           children: [
             Container(
               width: 3,
-              height: 34,
+              height: 48,
               margin: const EdgeInsets.only(top: 2, right: 12),
               decoration: BoxDecoration(
                 color: tones.done,
@@ -45,7 +45,9 @@ class CreditLine extends StatelessWidget {
                   Text(Credit.author,
                       style: t.labelLarge?.copyWith(color: tones.muted)),
                   const SizedBox(height: 2),
-                  Text(Credit.structure,
+                  Text(Credit.hospital,
+                      style: t.bodySmall?.copyWith(color: tones.muted)),
+                  Text(Credit.unit,
                       style: t.bodySmall?.copyWith(color: tones.muted)),
                 ],
               ),
