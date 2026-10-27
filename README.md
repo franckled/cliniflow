@@ -80,6 +80,17 @@ Prérequis côté Apple :
 Secrets GitHub : `APPLE_TEAM_ID`, `ASC_KEY_ID`, `ASC_ISSUER_ID`, `ASC_KEY_P8`
 (contenu du fichier `.p8`).
 
+## Publication Android (Google Play)
+
+Workflow `.github/workflows/play.yml`, lancé à la main (Actions › Google Play ›
+Run workflow) ou par un tag `v*`. Il produit l'app bundle `.aab` signé avec la
+clé d'envoi (alias `upload`), téléchargeable dans les artefacts de
+l'exécution. `tool/android_signing.py` branche la signature sur
+`android/key.properties`, écrit par la CI.
+
+Secrets GitHub : `ANDROID_KEYSTORE_B64` (keystore encodé en base64) et
+`ANDROID_KEYSTORE_PASSWORD`. Le keystore n'est jamais versionné.
+
 ## Avertissement
 
 CliniFlow est une aide à la décision. La qualification définitive d'une

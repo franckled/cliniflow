@@ -1,0 +1,97 @@
+name: Google Play
+
+# Compile l'app bundle Android (.aab) signé avec la clé d'envoi Google Play,
+# à télécharger dans les artefacts de l'exécution puis à déposer dans la
+# Play Console.
+#
+# Secrets requis (Settings › Secrets and variables › Actions) :
+#   ANDROID_KEYSTORE_B64       contenu du fichier ANDROID_KEYSTORE_B64.txt
+#   ANDROID_KEYSTORE_PASSWORD  mot de passe de la clé (même valeur pour le
+#                              magasin et la clé, alias « upload »)
+#
+# Lancement : onglet Actions › Google Play › Run workflow, ou tag v*.
+
+on:
+  workflow_dispatch:
+  push:
+    tags: ["v*"]
+
+jobs:
+  bundle:
+    name: App bundle signé
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - name: Vérifier les secrets
+        env:
+          KS: ${{ secrets.ANDROID_KEYSTORE_B64 }}
+          PW: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+        run: |
+          missing=""
+          [ -z "$KS" ] && missing="$missing ANDROID_KEYSTORE_B64"
+          [ -z "$PW" ] && missing="$missing ANDROID_KEYSTORE_PASSWORD"
+          if [ -n "$missing" ]; then
+            echo "::error::Secrets manquants :$missing"
+            exit 1
+          fi
+
+      - uses: actions/checkout@v5
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: "17"
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+
+      - run: bash tool/bootstrap_platforms.sh
+      - run: flutter pub get
+      - run: dart run flutter_launcher_icons
+
+      - name: Installer la clé d'envoi
+        env:
+          KS: ${{ secrets.ANDROID_KEYSTORE_B64 }}
+          PW: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+        run: |
+          echo "$KS" | base64 --decode > "$RUNNER_TEMP/upload.jks"
+          cat > android/key.properties <<EOF
+          storePassword=$PW
+          keyPassword=$PW
+          keyAlias=upload
+          storeFile=$RUNNER_TEMP/upload.jks
+          EOF
+          keytool -list -keystore "$RUNNER_TEMP/upload.jks" -storepass "$PW" -alias upload > /dev/null
+          python3 tool/android_signing.py
+
+      # Code de version unique et croissant, exigé par Google Play.
+      - name: Compiler l'app bundle
+        run: |
+          BUILD_NUMBER=$((100 + GITHUB_RUN_NUMBER))
+          echo "BUILD_NUMBER=$BUILD_NUMBER" >> "$GITHUB_ENV"
+          flutter build appbundle --release \
+            --build-number "$BUILD_NUMBER" \
+            --dart-define=APP_VERSION=android-${GITHUB_SHA::7}
+          AAB=build/app/outputs/bundle/release/app-release.aab
+          # Contrôle : le bundle doit être signé avec la clé d'envoi.
+          keytool -printcert -jarfile "$AAB" | grep -q "Unite de Recherche Clinique"
+          cp "$AAB" "$RUNNER_TEMP/cliniflow-$BUILD_NUMBER.aab"
+
+      - uses: actions/upload-artifact@v5
+        with:
+          name: cliniflow-google-play-${{ env.BUILD_NUMBER }}
+          path: ${{ runner.temp }}/cliniflow-${{ env.BUILD_NUMBER }}.aab
+          retention-days: 30
+
+      - name: Résumé
+        run: |
+          VERSION=$(grep -m1 '^version:' pubspec.yaml | cut -d' ' -f2 | cut -d+ -f1)
+          {
+            echo "### App bundle prêt pour Google Play"
+            echo "Version $VERSION, code de version $BUILD_NUMBER."
+            echo "Téléchargez l'artefact ci-dessous, décompressez-le et déposez le fichier .aab dans la Play Console."
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Nettoyer
+        if: always()
+        run: rm -f "$RUNNER_TEMP/upload.jks" android/key.properties
