@@ -73,7 +73,7 @@ jobs:
           BUILD_NUMBER=$((100 + GITHUB_RUN_NUMBER))
           echo "BUILD_NUMBER=$BUILD_NUMBER" >> "$GITHUB_ENV"
           set -o pipefail
-          flutter build ios --release --config-only \
+          flutter build ios --release --config-only --no-codesign \
             --build-number "$BUILD_NUMBER" \
             --dart-define=APP_VERSION=ios-${GITHUB_SHA::7} \
             2>&1 | tee "$RUNNER_TEMP/prepare.log"
