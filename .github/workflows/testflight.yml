@@ -66,6 +66,7 @@ jobs:
       - run: bash tool/bootstrap_platforms.sh
       - run: flutter pub get
       - run: dart run flutter_launcher_icons
+      - run: bash tool/check_ios_icon.sh
 
       # Numéro de build unique et croissant : le numéro d'exécution du workflow,
       # décalé pour rester au-dessus des builds envoyés à la main.
