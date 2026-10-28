@@ -1,8 +1,11 @@
 name: TestFlight
 
 # Compile l'app iOS et l'envoie sur App Store Connect / TestFlight. La clé API
-# App Store Connect sert à créer, pour chaque build, un certificat de
-# distribution et un profil App Store temporaires, révoqués à la fin.
+# App Store Connect sert à créer (au premier build) puis réutiliser un
+# certificat de distribution et un profil App Store durables. Le certificat
+# n'est jamais révoqué : Apple revérifie la signature lors de l'examen
+# (sinon rejet ITMS-90035). Sa clé privée est gardée chiffrée dans la
+# branche ci-signing, déchiffrable seulement avec le secret ASC_KEY_P8.
 #
 # Secrets requis (Settings › Secrets and variables › Actions) :
 #   APPLE_TEAM_ID   identifiant d'équipe Apple Developer (10 caractères)
@@ -80,9 +83,15 @@ jobs:
             --dart-define=APP_VERSION=ios-${GITHUB_SHA::7} \
             2>&1 | tee "$RUNNER_TEMP/prepare.log"
 
-      # Certificat de distribution et profil App Store créés pour ce build via
-      # l'API, révoqués à la fin : rien à gérer à la main, pas d'accumulation.
-      - name: Créer certificat et profil de distribution
+      # Certificat de distribution et profil App Store durables, réutilisés
+      # d'un build à l'autre (créés automatiquement au premier passage).
+      - name: Récupérer la clé de signature sauvegardée
+        run: |
+          if git fetch -q --depth 1 origin ci-signing 2>/dev/null; then
+            git show FETCH_HEAD:dist_key.enc > "$RUNNER_TEMP/dist_key.enc" || true
+          fi
+
+      - name: Préparer certificat et profil de distribution
         env:
           BUNDLE_ID: fr.cliniflow.app
         run: |
@@ -93,8 +102,23 @@ jobs:
           echo "::add-mask::$P12_PASSWORD"
           echo "P12_PASSWORD=$P12_PASSWORD" >> "$GITHUB_ENV"
           OUT_DIR="$RUNNER_TEMP/signing" P12_PASSWORD="$P12_PASSWORD" \
+            KEY_STORE="$RUNNER_TEMP/dist_key.enc" \
+            NEW_KEY_STORE="$RUNNER_TEMP/dist_key.new.enc" \
             "$RUNNER_TEMP/venv/bin/python" tool/asc_signing.py setup \
             2>&1 | tee "$RUNNER_TEMP/signing.log"
+
+      - name: Sauvegarder la nouvelle clé de signature
+        if: env.ASC_NEW_KEY != ''
+        run: |
+          D="$RUNNER_TEMP/ci-signing"
+          mkdir -p "$D"
+          cp "$ASC_NEW_KEY" "$D/dist_key.enc"
+          echo "Clé privée du certificat Apple Distribution, chiffrée (AES-256-GCM) avec une clé dérivée du secret ASC_KEY_P8. Ne pas supprimer." > "$D/README"
+          cd "$D"
+          git init -q -b ci-signing
+          git add -A
+          git -c user.name=ci -c user.email=ci@users.noreply.github.com commit -qm "clé de signature"
+          git push -qf "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}" ci-signing
 
       - name: Installer la signature dans un trousseau dédié
         run: |
@@ -192,17 +216,11 @@ jobs:
           echo "### Build $BUILD_NUMBER envoyé sur App Store Connect" >> "$GITHUB_STEP_SUMMARY"
           echo "Il apparaît dans TestFlight après le traitement par Apple (10 à 30 min)." >> "$GITHUB_STEP_SUMMARY"
 
-      - name: Révoquer certificat et profil
-        if: always()
-        run: |
-          [ -n "${ASC_CERT_ID:-}${ASC_PROFILE_ID:-}" ] || exit 0
-          "$RUNNER_TEMP/venv/bin/python" tool/asc_signing.py cleanup
-
       - name: Supprimer la clé et le trousseau
         if: always()
         run: |
           [ -n "${KEYCHAIN:-}" ] && security delete-keychain "$KEYCHAIN" || true
-          rm -rf "$RUNNER_TEMP/keys" "$RUNNER_TEMP/signing"
+          rm -rf "$RUNNER_TEMP/keys" "$RUNNER_TEMP/signing" "$RUNNER_TEMP"/dist_key*.enc
 
       # En cas d'échec, les journaux (sans secret) sont déposés dans la branche
       # ci-logs pour pouvoir être lus hors de GitHub.
