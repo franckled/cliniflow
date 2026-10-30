@@ -1,0 +1,151 @@
+== appiconset
+total 336
+drwxr-xr-x  24 runner  staff    768 Oct 30 14:51 .
+drwxr-xr-x   4 runner  staff    128 Oct 30 14:51 ..
+-rw-r--r--   1 runner  staff   2097 Oct 30 14:51 Contents.json
+-rw-r--r--   1 runner  staff  60107 Oct 30 14:51 Icon-App-1024x1024@1x.png
+-rw-r--r--   1 runner  staff    481 Oct 30 14:51 Icon-App-20x20@1x.png
+-rw-r--r--   1 runner  staff   1159 Oct 30 14:51 Icon-App-20x20@2x.png
+-rw-r--r--   1 runner  staff   1865 Oct 30 14:51 Icon-App-20x20@3x.png
+-rw-r--r--   1 runner  staff    773 Oct 30 14:51 Icon-App-29x29@1x.png
+-rw-r--r--   1 runner  staff   1758 Oct 30 14:51 Icon-App-29x29@2x.png
+-rw-r--r--   1 runner  staff   2800 Oct 30 14:51 Icon-App-29x29@3x.png
+-rw-r--r--   1 runner  staff   1159 Oct 30 14:51 Icon-App-40x40@1x.png
+-rw-r--r--   1 runner  staff   2588 Oct 30 14:51 Icon-App-40x40@2x.png
+-rw-r--r--   1 runner  staff   4110 Oct 30 14:51 Icon-App-40x40@3x.png
+-rw-r--r--   1 runner  staff   1504 Oct 30 14:51 Icon-App-50x50@1x.png
+-rw-r--r--   1 runner  staff   3383 Oct 30 14:51 Icon-App-50x50@2x.png
+-rw-r--r--   1 runner  staff   1806 Oct 30 14:51 Icon-App-57x57@1x.png
+-rw-r--r--   1 runner  staff   3902 Oct 30 14:51 Icon-App-57x57@2x.png
+-rw-r--r--   1 runner  staff   4110 Oct 30 14:51 Icon-App-60x60@2x.png
+-rw-r--r--   1 runner  staff   6443 Oct 30 14:51 Icon-App-60x60@3x.png
+-rw-r--r--   1 runner  staff   2464 Oct 30 14:51 Icon-App-72x72@1x.png
+-rw-r--r--   1 runner  staff   5277 Oct 30 14:51 Icon-App-72x72@2x.png
+-rw-r--r--   1 runner  staff   2615 Oct 30 14:51 Icon-App-76x76@1x.png
+-rw-r--r--   1 runner  staff   5704 Oct 30 14:51 Icon-App-76x76@2x.png
+-rw-r--r--   1 runner  staff   6136 Oct 30 14:51 Icon-App-83.5x83.5@2x.png
+== Contents.json
+{"images":[{"size":"20x20","idiom":"iphone","filename":"Icon-App-20x20@2x.png","scale":"2x"},{"size":"20x20","idiom":"iphone","filename":"Icon-App-20x20@3x.png","scale":"3x"},{"size":"29x29","idiom":"iphone","filename":"Icon-App-29x29@1x.png","scale":"1x"},{"size":"29x29","idiom":"iphone","filename":"Icon-App-29x29@2x.png","scale":"2x"},{"size":"29x29","idiom":"iphone","filename":"Icon-App-29x29@3x.png","scale":"3x"},{"size":"40x40","idiom":"iphone","filename":"Icon-App-40x40@2x.png","scale":"2x"},{"size":"40x40","idiom":"iphone","filename":"Icon-App-40x40@3x.png","scale":"3x"},{"size":"57x57","idiom":"iphone","filename":"Icon-App-57x57@1x.png","scale":"1x"},{"size":"57x57","idiom":"iphone","filename":"Icon-App-57x57@2x.png","scale":"2x"},{"size":"60x60","idiom":"iphone","filename":"Icon-App-60x60@2x.png","scale":"2x"},{"size":"60x60","idiom":"iphone","filename":"Icon-App-60x60@3x.png","scale":"3x"},{"size":"20x20","idiom":"ipad","filename":"Icon-App-20x20@1x.png","scale":"1x"},{"size":"20x20","idiom":"ipad","filename":"Icon-App-20x20@2x.png","scale":"2x"},{"size":"29x29","idiom":"ipad","filename":"Icon-App-29x29@1x.png","scale":"1x"},{"size":"29x29","idiom":"ipad","filename":"Icon-App-29x29@2x.png","scale":"2x"},{"size":"40x40","idiom":"ipad","filename":"Icon-App-40x40@1x.png","scale":"1x"},{"size":"40x40","idiom":"ipad","filename":"Icon-App-40x40@2x.png","scale":"2x"},{"size":"50x50","idiom":"ipad","filename":"Icon-App-50x50@1x.png","scale":"1x"},{"size":"50x50","idiom":"ipad","filename":"Icon-App-50x50@2x.png","scale":"2x"},{"size":"72x72","idiom":"ipad","filename":"Icon-App-72x72@1x.png","scale":"1x"},{"size":"72x72","idiom":"ipad","filename":"Icon-App-72x72@2x.png","scale":"2x"},{"size":"76x76","idiom":"ipad","filename":"Icon-App-76x76@1x.png","scale":"1x"},{"size":"76x76","idiom":"ipad","filename":"Icon-App-76x76@2x.png","scale":"2x"},{"size":"83.5x83.5","idiom":"ipad","filename":"Icon-App-83.5x83.5@2x.png","scale":"2x"},{"size":"1024x1024","idiom":"ios-marketing","filename":"Icon-App-1024x1024@1x.png","scale":"1x"}],"info":{"version":1,"author":"xcode"}}== pbxproj
+324:				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+377:				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+445:				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = AppIcon;
+503:				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = AppIcon;
+558:				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+580:				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+== app
+AppIcon60x60@2x.png
+AppIcon76x76@2x~ipad.png
+Assets.car
+== Info.plist
+  "CFBundleIcons" => {
+    "CFBundlePrimaryIcon" => {
+      "CFBundleIconFiles" => [
+        0 => "AppIcon60x60"
+      ]
+      "CFBundleIconName" => "AppIcon"
+    }
+  }
+  "CFBundleIcons~ipad" => {
+    "CFBundlePrimaryIcon" => {
+      "CFBundleIconFiles" => [
+        0 => "AppIcon60x60"
+        1 => "AppIcon76x76"
+      ]
+      "CFBundleIconName" => "AppIcon"
+    }
+  }
+  "CFBundleIdentifier" => "fr.cliniflow.app"
+  "CFBundleInfoDictionaryVersion" => "6.0"
+  "CFBundleName" => "cliniflow"
+  "CFBundlePackageType" => "APPL"
+  "CFBundleShortVersionString" => "0.1.0"
+  "CFBundleSignature" => "????"
+  "CFBundleSupportedPlatforms" => [
+    0 => "iPhoneOS"
+  ]
+  "CFBundleVersion" => "1"
+== Assets.car
+objc[3717]: Class OS_at_encoder is implemented in both /usr/lib/libate.dylib (0x1fc6e12e8) and /Applications/Xcode_26.6.app/Contents/Developer/Platforms/iPhoneOS.platform/usr/bin/assetutil (0x1011b29d8). This may cause spurious casting failures and mysterious crashes. One of the duplicates must be removed or renamed.
+    "Idiom" : "phone",
+    "Name" : "AppIcon",
+    "PixelWidth" : 29,
+    "RenditionName" : "Icon-App-29x29@1x.png",
+    "Idiom" : "phone",
+    "Name" : "AppIcon",
+    "PixelWidth" : 57,
+    "RenditionName" : "Icon-App-57x57@1x.png",
+    "Idiom" : "pad",
+    "Name" : "AppIcon",
+    "PixelWidth" : 20,
+    "RenditionName" : "Icon-App-20x20@1x.png",
+    "Idiom" : "pad",
+    "Name" : "AppIcon",
+    "PixelWidth" : 29,
+    "RenditionName" : "Icon-App-29x29@1x.png",
+    "Idiom" : "pad",
+    "Name" : "AppIcon",
+    "PixelWidth" : 40,
+    "RenditionName" : "Icon-App-40x40@1x.png",
+    "Idiom" : "pad",
+    "Name" : "AppIcon",
+    "PixelWidth" : 50,
+    "RenditionName" : "Icon-App-50x50@1x.png",
+    "Idiom" : "pad",
+    "Name" : "AppIcon",
+    "PixelWidth" : 72,
+    "RenditionName" : "Icon-App-72x72@1x.png",
+    "Idiom" : "pad",
+    "Name" : "AppIcon",
+    "PixelWidth" : 76,
+    "RenditionName" : "Icon-App-76x76@1x.png",
+    "Idiom" : "marketing",
+    "Name" : "AppIcon",
+    "PixelWidth" : 1024,
+    "RenditionName" : "Icon-App-1024x1024@1x.png",
+    "Idiom" : "phone",
+    "Name" : "AppIcon",
+    "PixelWidth" : 40,
+    "RenditionName" : "Icon-App-20x20@2x.png",
+    "Idiom" : "phone",
+    "Name" : "AppIcon",
+    "PixelWidth" : 58,
+    "RenditionName" : "Icon-App-29x29@2x.png",
+    "Idiom" : "phone",
+    "Name" : "AppIcon",
+    "PixelWidth" : 80,
+    "RenditionName" : "Icon-App-40x40@2x.png",
+    "Idiom" : "phone",
+    "Name" : "AppIcon",
+    "PixelWidth" : 114,
+    "RenditionName" : "Icon-App-57x57@2x.png",
+    "Idiom" : "phone",
+    "Name" : "AppIcon",
+    "PixelWidth" : 120,
+    "RenditionName" : "Icon-App-60x60@2x.png",
+    "Idiom" : "phone",
+    "Name" : "AppIcon",
+    "PixelWidth" : 180,
+    "RenditionName" : "Icon-App-60x60@3x.png",
+    "Idiom" : "pad",
+    "Name" : "AppIcon",
+    "PixelWidth" : 40,
+    "RenditionName" : "Icon-App-20x20@2x.png",
+    "Idiom" : "pad",
+    "Name" : "AppIcon",
+    "PixelWidth" : 58,
+    "RenditionName" : "Icon-App-29x29@2x.png",
+    "Idiom" : "pad",
+    "Name" : "AppIcon",
+    "PixelWidth" : 80,
+    "RenditionName" : "Icon-App-40x40@2x.png",
+    "Idiom" : "pad",
+    "Name" : "AppIcon",
+    "PixelWidth" : 100,
+    "RenditionName" : "Icon-App-50x50@2x.png",
+    "Idiom" : "pad",
+    "Name" : "AppIcon",
+    "PixelWidth" : 144,
+    "RenditionName" : "Icon-App-72x72@2x.png",
+== xcode
+Xcode 26.6
+Build version 17F113
