@@ -1,0 +1,36 @@
+{
+    "name": "CliniFlow",
+    "short_name": "CliniFlow",
+    "start_url": ".",
+    "display": "standalone",
+    "background_color": "#12324A",
+    "theme_color": "#12324A",
+    "description": "Qualifier une recherche clinique et suivre ses démarches réglementaires.",
+    "orientation": "portrait-primary",
+    "prefer_related_applications": false,
+    "lang": "fr",
+    "icons": [
+        {
+            "src": "icons/Icon-192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "icons/Icon-512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        },
+        {
+            "src": "icons/Icon-maskable-192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "maskable"
+        },
+        {
+            "src": "icons/Icon-maskable-512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "maskable"
+        }
+    ]
+}
