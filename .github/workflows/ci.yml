@@ -109,13 +109,30 @@ jobs:
       # Chaque version remplace l'ancienne sans délai : pas de service worker
       # ni de cache navigateur sur le point d'entrée.
       - run: python3 tool/web_no_cache.py build/web "${GITHUB_SHA::7}"
-      # Les routes de l'app sont internes : on sert index.html pour toute URL.
-      - run: cp build/web/index.html build/web/404.html
-      # Pages statiques (politique de confidentialité).
-      - run: cp tool/web_extra/*.html build/web/
+      # L'application n'est plus publiée sur le web (elle reste compilée
+      # ci-dessus pour vérifier le code). Seules les pages publiques sont en
+      # ligne : la politique de confidentialité, et le site du dossier site/
+      # dès qu'il existe (sinon une page d'attente).
+      - name: Préparer le site public (sans l'application)
+        run: |
+          rm -rf public && mkdir -p public
+          cp tool/web_extra/*.html public/
+          cat > public/index.html <<'HTML'
+          <!doctype html>
+          <html lang="fr"><head><meta charset="utf-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1">
+          <title>CliniFlow</title></head>
+          <body style="font-family:sans-serif;max-width:640px;margin:60px auto;padding:0 20px;line-height:1.5">
+          <h1>CliniFlow</h1>
+          <p>Le site de présentation arrive bientôt.</p>
+          <p><a href="confidentialite.html">Politique de confidentialité</a></p>
+          </body></html>
+          HTML
+          if [ -d site ]; then cp -R site/. public/; fi
+          find public -maxdepth 2 | sort
       - uses: actions/upload-pages-artifact@v4
         with:
-          path: build/web
+          path: public
       # Copie de la version web dans une branche, pour les captures d'écran
       # de contrôle prises hors de GitHub.
       - name: Publier l'aperçu dans la branche web-preview
