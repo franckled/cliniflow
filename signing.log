@@ -1,0 +1,6 @@
+certificat existant réutilisé
+nouveau profil créé
+ASC_PROFILE_NAME=CliniFlow CI AppStore
+ASC_PROFILE_UUID=eb191c95-9d0f-4f3a-b754-92a1dc9ef226
+ASC_PROFILE_PATH=/Users/runner/work/_temp/signing/appstore.mobileprovision
+ASC_P12_PATH=/Users/runner/work/_temp/signing/dist.p12

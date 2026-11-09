@@ -1,0 +1,400 @@
+    export SWIFT_PACKAGE_NAME=
+    export SWIFT_PLATFORM_TARGET_PREFIX=ios
+    export SWIFT_PRECOMPILE_BRIDGING_HEADER=YES
+    export SWIFT_REFLECTION_METADATA_LEVEL=all
+    export SWIFT_RESOURCE_DIR=
+    export SWIFT_RESPONSE_FILE_PATH=
+    export SWIFT_SERIALIZE_DEBUGGING_OPTIONS=YES
+    export SWIFT_SKIP_AUTOLINKING_ALL_FRAMEWORKS=NO
+    export SWIFT_STDLIB=swiftCore
+    export SWIFT_STDLIB_TOOL_ACTION=
+    export SWIFT_STDLIB_TOOL_CODE_SIGN_IDENTITY=
+    export SWIFT_STDLIB_TOOL_DESTINATION_DIR=/Users/runner/Library/Developer/Xcode/DerivedData/Runner-bytshsvliyxuarcdduaamzirnode/Build/Intermediates.noindex/ArchiveIntermediates/Runner/InstallationBuildProductsLocation/Applications/Runner.app/Frameworks
+    export SWIFT_STDLIB_TOOL_EXECUTABLE_TO_SCAN=
+    export SWIFT_STDLIB_TOOL_FOLDERS_TO_SCAN=
+    export SWIFT_STDLIB_TOOL_KEYCHAIN=
+    export SWIFT_STDLIB_TOOL_OTHER_CODE_SIGN_FLAGS="--keychain /Users/runner/work/_temp/build.keychain-db"
+    export SWIFT_STDLIB_TOOL_SOURCE_LIBRARIES=
+    export SWIFT_STDLIB_TOOL_STRIP_BITCODE=YES
+    export SWIFT_STDLIB_TOOL_TOOLCHAINS="/var/run/com.apple.security.cryptexd/mnt/com.apple.MobileAsset.MetalToolchain-v17.6.109.0.sF9vSM/Metal.xctoolchain /Applications/Xcode_26.6.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain"
+    export SWIFT_STDLIB_TOOL_UNSIGNED_DESTINATION_DIR=/Users/runner/Library/Developer/Xcode/DerivedData/Runner-bytshsvliyxuarcdduaamzirnode/Build/Intermediates.noindex/ArchiveIntermediates/Runner/BuildProductsPath/SwiftSupport
+    export SWIFT_STDLIB_TOOL_VERBOSITY=verbose
+    export SWIFT_STRICT_CONCURRENCY=minimal
+    export SWIFT_STRICT_CONCURRENCY_DEFAULT=minimal
+    export SWIFT_STRICT_CONCURRENCY_IN_SWIFT_VERSION_6_0=complete
+    export SWIFT_STRICT_MEMORY_SAFETY=NO
+    export SWIFT_SUPPRESS_WARNINGS=NO
+    export SWIFT_SYSTEM_INCLUDE_PATHS=
+    export SWIFT_TARGET_TRIPLE=undefined_arch-apple-ios15.0
+    export SWIFT_THREAD_SANITIZER=
+    export SWIFT_TREAT_WARNINGS_AS_ERRORS=NO
+    export SWIFT_UPCOMING_FEATURE_6_0=NO
+    export SWIFT_UPCOMING_FEATURE_CONCISE_MAGIC_FILE=NO
+    export SWIFT_UPCOMING_FEATURE_DEPRECATE_APPLICATION_MAIN=NO
+    export SWIFT_UPCOMING_FEATURE_DISABLE_OUTWARD_ACTOR_ISOLATION=NO
+    export SWIFT_UPCOMING_FEATURE_DYNAMIC_ACTOR_ISOLATION=NO
+    export SWIFT_UPCOMING_FEATURE_EXISTENTIAL_ANY=No
+    export SWIFT_UPCOMING_FEATURE_FORWARD_TRAILING_CLOSURES=NO
+    export SWIFT_UPCOMING_FEATURE_GLOBAL_ACTOR_ISOLATED_TYPES_USABILITY=NO
+    export SWIFT_UPCOMING_FEATURE_GLOBAL_CONCURRENCY=NO
+    export SWIFT_UPCOMING_FEATURE_IMPLICIT_OPEN_EXISTENTIALS=NO
+    export SWIFT_UPCOMING_FEATURE_IMPORT_OBJC_FORWARD_DECLS=NO
+    export SWIFT_UPCOMING_FEATURE_INFER_ISOLATED_CONFORMANCES=NO
+    export SWIFT_UPCOMING_FEATURE_INFER_SENDABLE_FROM_CAPTURES=NO
+    export SWIFT_UPCOMING_FEATURE_INTERNAL_IMPORTS_BY_DEFAULT=NO
+    export SWIFT_UPCOMING_FEATURE_ISOLATED_DEFAULT_VALUES=NO
+    export SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY=NO
+    export SWIFT_UPCOMING_FEATURE_NONFROZEN_ENUM_EXHAUSTIVITY=NO
+    export SWIFT_UPCOMING_FEATURE_NONISOLATED_NONSENDING_BY_DEFAULT=NO
+    export SWIFT_UPCOMING_FEATURE_REGION_BASED_ISOLATION=NO
+    export SWIFT_USE_PARALLEL_WHOLE_MODULE_OPTIMIZATION=YES
+    export SWIFT_USE_PARALLEL_WMO_TARGETS=YES
+    export SWIFT_VALIDATE_CLANG_MODULES_ONCE_PER_BUILD_SESSION=YES
+    export SWIFT_VERSION=5.0
+    export SWIFT_WARNINGS_AS_ERRORS_GROUPS=
+    export SWIFT_WARNINGS_AS_WARNINGS_GROUPS=
+    export SWIFT_WHOLE_MODULE_OPTIMIZATION=NO
+    export SYMBOL_GRAPH_EXTRACTOR_EXEC=swift-symbolgraph-extract
+    export SYMBOL_GRAPH_EXTRACTOR_MODULE_CACHE_PATH=/Users/runner/Library/Developer/Xcode/DerivedData/ModuleCache.noindex
+    export SYMBOL_GRAPH_EXTRACTOR_MODULE_NAME=Runner
+    export SYMBOL_GRAPH_EXTRACTOR_OUTPUT_BASE=/Users/runner/Library/Developer/Xcode/DerivedData/Runner-bytshsvliyxuarcdduaamzirnode/Build/Intermediates.noindex/ArchiveIntermediates/Runner/IntermediateBuildFilesPath/Runner.build/Release-iphoneos/Runner.build/symbol-graph
+    export SYMBOL_GRAPH_EXTRACTOR_OUTPUT_DIR=/Users/runner/Library/Developer/Xcode/DerivedData/Runner-bytshsvliyxuarcdduaamzirnode/Build/Intermediates.noindex/ArchiveIntermediates/Runner/IntermediateBuildFilesPath/Runner.build/Release-iphoneos/Runner.build/symbol-graph/swift/undefined_arch-apple-ios15.0
+    export SYMBOL_GRAPH_EXTRACTOR_SDK=iphoneos
+    export SYMBOL_GRAPH_EXTRACTOR_SEARCH_PATHS=
+    export SYMBOL_GRAPH_EXTRACTOR_SWIFT_VERSION=5.0
+    export SYMBOL_GRAPH_EXTRACTOR_TARGET_TRIPLE=undefined_arch-apple-ios15.0
+    export SYMBOL_HEADER=
+    export SYMROOT=/Users/runner/Library/Developer/Xcode/DerivedData/Runner-bytshsvliyxuarcdduaamzirnode/Build/Intermediates.noindex/ArchiveIntermediates/Runner/BuildProductsPath
+    export SYSTEM_ADMIN_APPS_DIR=/Applications/Utilities
+    export SYSTEM_APPS_DIR=/Applications
+    export SYSTEM_CORE_SERVICES_DIR=/System/Library/CoreServices
+    export SYSTEM_DEMOS_DIR=/Applications/Extras
+    export SYSTEM_DEVELOPER_APPS_DIR=/Applications/Xcode_26.6.app/Contents/Developer/Applications
+    export SYSTEM_DEVELOPER_BIN_DIR=/Applications/Xcode_26.6.app/Contents/Developer/usr/bin
+    export SYSTEM_DEVELOPER_DEMOS_DIR="/Applications/Xcode_26.6.app/Contents/Developer/Applications/Utilities/Built Examples"
+    export SYSTEM_DEVELOPER_DIR=/Applications/Xcode_26.6.app/Contents/Developer
+    export SYSTEM_DEVELOPER_DOC_DIR="/Applications/Xcode_26.6.app/Contents/Developer/ADC Reference Library"
+    export SYSTEM_DEVELOPER_EXECUTABLES_DIR=
+    export SYSTEM_DEVELOPER_GRAPHICS_TOOLS_DIR="/Applications/Xcode_26.6.app/Contents/Developer/Applications/Graphics Tools"
+    export SYSTEM_DEVELOPER_JAVA_TOOLS_DIR="/Applications/Xcode_26.6.app/Contents/Developer/Applications/Java Tools"
+    export SYSTEM_DEVELOPER_PERFORMANCE_TOOLS_DIR="/Applications/Xcode_26.6.app/Contents/Developer/Applications/Performance Tools"
+    export SYSTEM_DEVELOPER_RELEASENOTES_DIR="/Applications/Xcode_26.6.app/Contents/Developer/ADC Reference Library/releasenotes"
+    export SYSTEM_DEVELOPER_TOOLS=/Applications/Xcode_26.6.app/Contents/Developer/Tools
+    export SYSTEM_DEVELOPER_TOOLS_DOC_DIR="/Applications/Xcode_26.6.app/Contents/Developer/ADC Reference Library/documentation/DeveloperTools"
+    export SYSTEM_DEVELOPER_TOOLS_RELEASENOTES_DIR="/Applications/Xcode_26.6.app/Contents/Developer/ADC Reference Library/releasenotes/DeveloperTools"
+    export SYSTEM_DEVELOPER_USR_DIR=/Applications/Xcode_26.6.app/Contents/Developer/usr
+    export SYSTEM_DEVELOPER_UTILITIES_DIR=/Applications/Xcode_26.6.app/Contents/Developer/Applications/Utilities
+    export SYSTEM_DEXT_INSTALL_PATH=/System/Library/DriverExtensions
+    export SYSTEM_DOCUMENTATION_DIR=/Library/Documentation
+    export SYSTEM_EXTENSIONS_FOLDER_PATH=Runner.app/SystemExtensions
+    export SYSTEM_EXTENSIONS_FOLDER_PATH_SHALLOW_BUNDLE_NO=Runner.app/Library/SystemExtensions
+    export SYSTEM_EXTENSIONS_FOLDER_PATH_SHALLOW_BUNDLE_YES=Runner.app/SystemExtensions
+    export SYSTEM_FRAMEWORK_SEARCH_PATHS=
+    export SYSTEM_HEADER_SEARCH_PATHS=
+    export SYSTEM_KEXT_INSTALL_PATH=/System/Library/Extensions
+    export SYSTEM_LIBRARY_DIR=/System/Library
+    export SYSTEM_LIBRARY_EXECUTABLES_DIR=
+    export ShallowBundle=YES
+    export SigningCert=
+    export SkipEmbeddedFrameworksValidation=
+    export TAPI_APPLICATION_EXTENSION_API_ONLY=NO
+    export TAPI_DEMANGLE=YES
+    export TAPI_DYLIB_ALLOWABLE_CLIENTS=
+    export TAPI_DYLIB_COMPATIBILITY_VERSION=
+    export TAPI_DYLIB_CURRENT_VERSION=
+    export TAPI_DYLIB_INSTALL_NAME=
+    export TAPI_EMIT_PROFILING_SYMBOLS=YES
+    export TAPI_ENABLE_MODULES=NO
+    export TAPI_ENABLE_PROJECT_HEADERS=NO
+    export TAPI_ENABLE_VERIFICATION_MODE=YES
+    export TAPI_EXCLUDE_PRIVATE_HEADERS=
+    export TAPI_EXCLUDE_PROJECT_HEADERS=
+    export TAPI_EXCLUDE_PUBLIC_HEADERS=
+    export TAPI_EXEC=tapi
+    export TAPI_EXTRACT_API_ENABLE_MODULES=YES
+    export TAPI_EXTRACT_API_ENABLE_OBJC_ARC=YES
+    export TAPI_EXTRACT_API_MODULE_CACHE_PATH=/Users/runner/Library/Developer/Xcode/DerivedData/ModuleCache.noindex
+    export TAPI_EXTRACT_API_OUTPUT_DIR=/Users/runner/Library/Developer/Xcode/DerivedData/Runner-bytshsvliyxuarcdduaamzirnode/Build/Intermediates.noindex/ArchiveIntermediates/Runner/IntermediateBuildFilesPath/Runner.build/Release-iphoneos/Runner.build/symbol-graph/clang/undefined_arch-apple-ios15.0
+    export TAPI_EXTRACT_API_SDKDB_OUTPUT_PATH=/Users/runner/Library/Developer/Xcode/DerivedData/Runner-bytshsvliyxuarcdduaamzirnode/Build/Intermediates.noindex/ArchiveIntermediates/Runner/IntermediateBuildFilesPath/Runner.build/Release-iphoneos/Runner.build/symbol-graph/clang/undefined_arch-apple-ios15.0/Runner.sdkdb
+    export TAPI_EXTRACT_API_SEARCH_PATHS=
+    export TAPI_EXTRACT_API_SYSTEM_ROOT=iphoneos
+    export TAPI_EXTRACT_API_TARGET_TRIPLE=undefined_arch-apple-ios15.0
+    export TAPI_EXTRA_PRIVATE_HEADERS=
+    export TAPI_EXTRA_PROJECT_HEADERS=
+    export TAPI_EXTRA_PUBLIC_HEADERS=
+    export TAPI_FRAMEWORK_SEARCH_PATHS=
+    export TAPI_HEADER_SEARCH_PATHS=
+    export TAPI_LANGUAGE=objective-c
+    export TAPI_LANGUAGE_STANDARD=compiler-default
+    export TAPI_LIBRARY_SEARCH_PATHS=
+    export TAPI_MODULES_VALIDATE_SYSTEM_HEADERS=NO
+    export TAPI_MODULE_CACHE_PATH=/Users/runner/Library/Developer/Xcode/DerivedData/ModuleCache.noindex
+    export TAPI_PREPROCESSOR_DEFINITIONS=" "
+    export TAPI_PRODUCT_TYPE=com.apple.product-type.application
+    export TAPI_READ_DSYM=YES
+    export TAPI_REEXPORTED_FRAMEWORK_INSTALL_NAMES=
+    export TAPI_REEXPORTED_FRAMEWORK_NAMES=
+    export TAPI_REEXPORTED_LIBRARY_INSTALL_NAMES=
+    export TAPI_REEXPORTED_LIBRARY_NAMES=
+    export TAPI_REEXPORTED_LIBRARY_PATHS=
+    export TAPI_RUNPATH_SEARCH_PATHS=" @executable_path/Frameworks"
+    export TAPI_SHARED_CACHE_ELIGIBLE=Automatic
+    export TAPI_SYSTEM_FRAMEWORK_SEARCH_PATHS=
+    export TAPI_SYSTEM_HEADER_SEARCH_PATHS=
+    export TAPI_TARGET_TRIPLE_ARCHS=arm64
+    export TAPI_USE_SRCROOT=YES
+    export TAPI_VERIFY_AGAINST=
+    export TAPI_VERIFY_MODE=Pedantic
+    export TARGETED_DEVICE_FAMILY=1,2
+    export TARGETNAME=Runner
+    export TARGET_BUILD_DIR=/Users/runner/Library/Developer/Xcode/DerivedData/Runner-bytshsvliyxuarcdduaamzirnode/Build/Intermediates.noindex/ArchiveIntermediates/Runner/InstallationBuildProductsLocation/Applications
+    export TARGET_BUILD_SUBPATH=
+    export TARGET_NAME=Runner
+    export TARGET_TEMP_DIR=/Users/runner/Library/Developer/Xcode/DerivedData/Runner-bytshsvliyxuarcdduaamzirnode/Build/Intermediates.noindex/ArchiveIntermediates/Runner/IntermediateBuildFilesPath/Runner.build/Release-iphoneos/Runner.build
+    export TEAM_ID=64QDSPLPXA
+    export TEMP_DIR=/Users/runner/Library/Developer/Xcode/DerivedData/Runner-bytshsvliyxuarcdduaamzirnode/Build/Intermediates.noindex/ArchiveIntermediates/Runner/IntermediateBuildFilesPath/Runner.build/Release-iphoneos/Runner.build
+    export TEMP_FILES_DIR=/Users/runner/Library/Developer/Xcode/DerivedData/Runner-bytshsvliyxuarcdduaamzirnode/Build/Intermediates.noindex/ArchiveIntermediates/Runner/IntermediateBuildFilesPath/Runner.build/Release-iphoneos/Runner.build
+    export TEMP_FILE_DIR=/Users/runner/Library/Developer/Xcode/DerivedData/Runner-bytshsvliyxuarcdduaamzirnode/Build/Intermediates.noindex/ArchiveIntermediates/Runner/IntermediateBuildFilesPath/Runner.build/Release-iphoneos/Runner.build
+    export TEMP_ROOT=/Users/runner/Library/Developer/Xcode/DerivedData/Runner-bytshsvliyxuarcdduaamzirnode/Build/Intermediates.noindex/ArchiveIntermediates/Runner/IntermediateBuildFilesPath
+    export TEMP_SANDBOX_DIR=/Users/runner/Library/Developer/Xcode/DerivedData/Runner-bytshsvliyxuarcdduaamzirnode/Build/Intermediates.noindex/ArchiveIntermediates/Runner/IntermediateBuildFilesPath/TemporaryTaskSandboxes
+    export TEST_FRAMEWORK_SEARCH_PATHS=" /Applications/Xcode_26.6.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/Library/Frameworks iphoneos/Developer/Library/Frameworks"
+    export TEST_HOST=
+    export TEST_LIBRARY_SEARCH_PATHS=" /Applications/Xcode_26.6.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/lib"
+    export TEXTURE_ATLAS_ENABLE_WARNINGS=Yes
+    export TEXTURE_ATLAS_FORMAT=RGBA8888_PNG
+    export TEXTURE_ATLAS_MAXIMUM_SIZE=2048x2048
+    export TMPDIR=/var/folders/h5/t85nd63d71x27_8gl5gw3l_w0000gn/T/
+    export TOOLCHAINS=
+    export TOOLCHAIN_DIR=/var/run/com.apple.security.cryptexd/mnt/com.apple.MobileAsset.MetalToolchain-v17.6.109.0.sF9vSM/Metal.xctoolchain
+    export TRACK_WIDGET_CREATION=false
+    export TREAT_MISSING_BASELINES_AS_TEST_FAILURES=NO
+    export TREAT_MISSING_SCRIPT_PHASE_OUTPUTS_AS_ERRORS=NO
+    export TREE_SHAKE_ICONS=true
+    export TVOS_DEPLOYMENT_TARGET=15.6
+    export UID=501
+    export UNEXPORTED_SYMBOLS_FILE=
+    export UNINSTALLED_PRODUCTS_DIR=/Users/runner/Library/Developer/Xcode/DerivedData/Runner-bytshsvliyxuarcdduaamzirnode/Build/Intermediates.noindex/ArchiveIntermediates/Runner/IntermediateBuildFilesPath/UninstalledProducts
+    export UNLOCALIZED_RESOURCES_FOLDER_PATH=Runner.app
+    export UNLOCALIZED_RESOURCES_FOLDER_PATH_SHALLOW_BUNDLE_NO=Runner.app/Resources
+    export UNLOCALIZED_RESOURCES_FOLDER_PATH_SHALLOW_BUNDLE_YES=Runner.app
+    export UNSTRIPPED_PRODUCT=NO
+    export USER=runner
+    export USER_APPS_DIR=/Users/runner/Applications
+    export USER_LIBRARY_DIR=/Users/runner/Library
+    export USE_DYNAMIC_NO_PIC=YES
+    export USE_GCC3_PFE_SUPPORT=
+    export USE_HEADERMAP=YES
+    export USE_HEADER_SYMLINKS=NO
+    export USE_SDK_TOOLCHAINS=YES
+    export VALIDATE_PLIST_FILES_WHILE_COPYING=NO
+    export VALIDATE_PRODUCT=YES
+    export VALIDATE_STRINGS_FILES_WHILE_COPYING=YES
+    export VALID_ARCHS="arm64e arm64"
+    export VCPKG_INSTALLATION_ROOT=/usr/local/share/vcpkg
+    export VERBOSE_PBXCP=NO
+    export VERSIONING_STUB=
+    export VERSIONING_SYSTEM=apple-generic
+    export VERSIONPLIST_PATH=Runner.app/version.plist
+    export VERSIONS_FOLDER_PATH=
+    export VERSION_INFO_BUILDER=runner
+    export VERSION_INFO_EXPORT_DECL=
+    export VERSION_INFO_FILE=Runner_vers.c
+    export VERSION_INFO_PREFIX=
+    export VERSION_INFO_STRING="\"@(#)PROGRAM:Runner  PROJECT:Runner-108\""
+    export VERSION_INFO_SUFFIX=
+    export VM_ASSETS=/usr/local/opt/runner/scripts
+    export ValidateForStore=YES
+    export WARNING_CFLAGS=
+    export WATCHKIT_2_SUPPORT_FOLDER_PATH=/Users/runner/Library/Developer/Xcode/DerivedData/Runner-bytshsvliyxuarcdduaamzirnode/Build/Intermediates.noindex/ArchiveIntermediates/Runner/BuildProductsPath/WatchKitSupport2
+    export WATCHOS_DEPLOYMENT_TARGET=8.7
+    export WATCH_BUILT_PRODUCTS_DIR=/Users/runner/Library/Developer/Xcode/DerivedData/Runner-bytshsvliyxuarcdduaamzirnode/Build/Intermediates.noindex/ArchiveIntermediates/Runner/BuildProductsPath/Release-watchos
+    export WORKSPACE_PATH=/Users/runner/work/cliniflow/cliniflow/ios/Runner.xcworkspace
+    export WRAPPER_EXTENSION=app
+    export WRAPPER_NAME=Runner.app
+    export WRAPPER_PREFIX=
+    export WRAPPER_SUFFIX=.app
+    export WRAP_ASSET_PACKS_IN_SEPARATE_DIRECTORIES=NO
+    export XCODE_26_DEVELOPER_DIR=/Applications/Xcode_26.6.app/Contents/Developer
+    export XCODE_APP_SUPPORT_DIR=/Applications/Xcode_26.6.app/Contents/Developer/Library/Xcode
+    export XCODE_DEVELOPER_DIR_PATH=
+    export XCODE_PRODUCT_BUILD_VERSION=17F113
+    export XCODE_VERSION_ACTUAL=2660
+    export XCODE_VERSION_MAJOR=2600
+    export XCODE_VERSION_MINOR=2660
+    export XCSTRINGS_FORCE_BUILD_ALL_STRINGS=NO
+    export XCSTRINGS_LANGUAGES_TO_COMPILE=
+    export XIB_COMPILER_INFOPLIST_CONTENT_FILE=/Users/runner/Library/Developer/Xcode/DerivedData/Runner-bytshsvliyxuarcdduaamzirnode/Build/Intermediates.noindex/ArchiveIntermediates/Runner/IntermediateBuildFilesPath/Runner.build/Release-iphoneos/Runner.build/-PartialInfo.plist
+    export XPCSERVICES_FOLDER_PATH=Runner.app/XPCServices
+    export XPC_FLAGS=0x0
+    export XPC_SERVICE_NAME=0
+    export XROS_DEPLOYMENT_TARGET=1.3
+    export YACC=yacc
+    export YACCFLAGS=
+    export YACC_GENERATED_FILE_STEM=Standard
+    export YACC_GENERATE_DEBUGGING_DIRECTIVES=NO
+    export YACC_INSERT_LINE_DIRECTIVES=YES
+    export _=/usr/bin/xcodebuild
+    export _CLANG_ENABLE_TYPED_ALLOCATOR_SUPPORT_DEFAULT=compiler-default
+    export _CLANG_ENABLE_TYPED_ALLOCATOR_SUPPORT_DEFAULT_ENHANCED_SECURITY_NO=compiler-default
+    export _CLANG_ENABLE_TYPED_ALLOCATOR_SUPPORT_DEFAULT_ENHANCED_SECURITY_YES=YES
+    export _CLANG_TRIVIAL_AUTO_VAR_INIT_DEFAULT=default
+    export _CLANG_TRIVIAL_AUTO_VAR_INIT_DEFAULT_ENABLE_ZERO_INIT_NO=default
+    export _CLANG_TRIVIAL_AUTO_VAR_INIT_DEFAULT_ENABLE_ZERO_INIT_YES=zero
+    export _DISCOVER_COMMAND_LINE_LINKER_INPUTS=YES
+    export _DISCOVER_COMMAND_LINE_LINKER_INPUTS_INCLUDE_WL=YES
+    export _LD_MULTIARCH=YES
+    export _PREFIXED_SWIFT_VERSION=_5.0
+    export _REZ_PREFIX_FILE=/Users/runner/work/cliniflow/cliniflow/ios/
+    export _UNSAFE_BUFFER_USAGE_DEFAULT=DEFAULT
+    export _UNSAFE_BUFFER_USAGE_DEFAULT_ENABLE_SAFE_BUFFERS_NO=DEFAULT
+    export _UNSAFE_BUFFER_USAGE_DEFAULT_ENABLE_SAFE_BUFFERS_YES=YES_ERROR
+    export _WRAPPER_CONTENTS_DIR=
+    export _WRAPPER_CONTENTS_DIR_SHALLOW_BUNDLE_NO=/Contents
+    export _WRAPPER_PARENT_PATH=
+    export _WRAPPER_PARENT_PATH_SHALLOW_BUNDLE_NO=/..
+    export _WRAPPER_RESOURCES_DIR=
+    export _WRAPPER_RESOURCES_DIR_SHALLOW_BUNDLE_NO=/Resources
+    export __CF_USER_TEXT_ENCODING="0x1F5:0x0:0x0"
+    export __CLANG_ANALYZER_DIVIDE_BY_ZERO_NO_SILENCE_STRING=core.DivideZero
+    export __CLANG_ANALYZER_DIVIDE_BY_ZERO_YES_SILENCE_STRING=.
+    export __CLANG_ANALYZER_NULL_DEREFERENCE_NO_SILENCE_STRING=core.NullDereference
+    export __CLANG_ANALYZER_NULL_DEREFERENCE_YES_SILENCE_STRING=.
+    export __CLANG_ANALYZER_SILENCE_CHECKERS=YES
+    export __CLANG_ANALYZER_SILENCE_CHECKERS_LIST=".;."
+    export __CPP_PREFIX_HEADER=
+    export __CREATE_INFOPLIST_SECTION_IN_BINARY=NO
+    export __DIAGNOSE_DEPRECATED_ARCHS=YES
+    export __ENHANCED_SECURITY_OR_BOUNDS_SAFE_BUFFERS=NO
+    export __ENHANCED_SECURITY_OR_BOUNDS_SAFE_BUFFERS_NO_NO=NO
+    export __ENHANCED_SECURITY_OR_BOUNDS_SAFE_BUFFERS_NO_YES=YES
+    export __ENHANCED_SECURITY_OR_BOUNDS_SAFE_BUFFERS_YES_NO=YES
+    export __ENHANCED_SECURITY_OR_BOUNDS_SAFE_BUFFERS_YES_YES=YES
+    export __IIG_DEPLOYMENT_TARGET__=15.0
+    export __IIG_FRAMEWORK_NAME__=com.apple.product-type.application
+    export __INPUT_FILE_LIST_PATH__=
+    export __IS_NOT_MACOS=YES
+    export __IS_NOT_MACOS_macosx=NO
+    export __IS_NOT_SIMULATOR=YES
+    export __IS_NOT_SIMULATOR_simulator=NO
+    export __LIBRARY_HARDENING_DEFAULT_VALUE=
+    export __LIBRARY_HARDENING_DEFAULT_VALUE_OPT_LEVEL_0_ENHANCED_SECURITY_OR_BOUNDS_SAFE_BUFFERS_NO=debug
+    export __LIBRARY_HARDENING_DEFAULT_VALUE_OPT_LEVEL_0_ENHANCED_SECURITY_OR_BOUNDS_SAFE_BUFFERS_YES=debug
+    export __LIBRARY_HARDENING_DEFAULT_VALUE_OPT_LEVEL_1_ENHANCED_SECURITY_OR_BOUNDS_SAFE_BUFFERS_YES=fast
+    export __LIBRARY_HARDENING_DEFAULT_VALUE_OPT_LEVEL_2_ENHANCED_SECURITY_OR_BOUNDS_SAFE_BUFFERS_YES=fast
+    export __LIBRARY_HARDENING_DEFAULT_VALUE_OPT_LEVEL_3_ENHANCED_SECURITY_OR_BOUNDS_SAFE_BUFFERS_YES=fast
+    export __LIBRARY_HARDENING_DEFAULT_VALUE_OPT_LEVEL_fast_ENHANCED_SECURITY_OR_BOUNDS_SAFE_BUFFERS_YES=fast
+    export __LIBRARY_HARDENING_DEFAULT_VALUE_OPT_LEVEL_s_ENHANCED_SECURITY_OR_BOUNDS_SAFE_BUFFERS_YES=fast
+    export __LIBRARY_HARDENING_DEFAULT_VALUE_OPT_LEVEL_z_ENHANCED_SECURITY_OR_BOUNDS_SAFE_BUFFERS_YES=fast
+    export __OTHER_IIG_CFLAGS__=YES
+    export __SWIFT_ENFORCE_EXCLUSIVE_ACCESS_DEBUG_ENFORCEMENT_DEBUG=YES
+    export __SWIFT_ENFORCE_EXCLUSIVE_ACCESS_DEBUG_ENFORCEMENT_RELEASE=YES
+    export __infoplist_absolute__=/Users/runner/Library/Developer/Xcode/DerivedData/Runner-bytshsvliyxuarcdduaamzirnode/Build/Intermediates.noindex/ArchiveIntermediates/Runner/InstallationBuildProductsLocation/Applications/Runner.app
+    export __infoplist_subpath__=Info.plist
+    export __no_validate_extension__=YES
+    export _exclude_ds_store_files_=
+    export _resolve_src_symlinks_=
+    export arch=undefined_arch
+    export build_file_compiler_flags=
+    export diagnostic_message_length=0
+    export mig_generate_client_sources=YES
+    export mig_generate_server_sources=NO
+    export print_note_include_stack=YES
+    export variant=normal
+    /bin/sh -c /var/folders/h5/t85nd63d71x27_8gl5gw3l_w0000gn/T/SchemeScriptAction-3eOqLM.sh
+Warning: unknown environment variable SWIFT_DEBUG_INFORMATION_FORMAT
+Warning: unknown environment variable SWIFT_DEBUG_INFORMATION_VERSION
+Warning: unknown environment variable SWIFT_DEBUG_INFORMATION_FORMAT
+Warning: unknown environment variable SWIFT_DEBUG_INFORMATION_VERSION
+Warning: unknown environment variable SWIFT_DEBUG_INFORMATION_FORMAT
+Warning: unknown environment variable SWIFT_DEBUG_INFORMATION_VERSION
+Warning: unknown environment variable SWIFT_DEBUG_INFORMATION_FORMAT
+Warning: unknown environment variable SWIFT_DEBUG_INFORMATION_VERSION
+Warning: unknown environment variable SWIFT_DEBUG_INFORMATION_FORMAT
+Warning: unknown environment variable SWIFT_DEBUG_INFORMATION_VERSION
+Warning: unknown environment variable SWIFT_DEBUG_INFORMATION_FORMAT
+Warning: unknown environment variable SWIFT_DEBUG_INFORMATION_VERSION
+Warning: unknown environment variable SWIFT_DEBUG_INFORMATION_FORMAT
+Warning: unknown environment variable SWIFT_DEBUG_INFORMATION_VERSION
+Warning: unknown environment variable SWIFT_DEBUG_INFORMATION_FORMAT
+Warning: unknown environment variable SWIFT_DEBUG_INFORMATION_VERSION
+
+note: Using codesigning identity override: Apple Distribution
+ComputePackagePrebuildTargetDependencyGraph
+
+Prepare packages
+
+CreateBuildRequest
+
+SendProjectDescription
+
+CreateBuildOperation
+
+ComputeTargetDependencyGraph
+note: Building targets in dependency order
+note: Target dependency graph (13 targets)
+    Target 'Runner' in project 'Runner'
+        ➜ Explicit dependency on target 'FlutterGeneratedPluginSwiftPackage' in project 'FlutterGeneratedPluginSwiftPackage'
+    Target 'FlutterGeneratedPluginSwiftPackage' in project 'FlutterGeneratedPluginSwiftPackage'
+        ➜ Explicit dependency on target 'FlutterGeneratedPluginSwiftPackage' in project 'FlutterGeneratedPluginSwiftPackage'
+        ➜ Explicit dependency on target 'printing' in project 'printing'
+        ➜ Explicit dependency on target 'shared-preferences-foundation' in project 'shared_preferences_foundation'
+        ➜ Explicit dependency on target 'url-launcher-ios' in project 'url_launcher_ios'
+        ➜ Explicit dependency on target 'FlutterFramework' in project 'FlutterFramework'
+    Target 'FlutterGeneratedPluginSwiftPackage' in project 'FlutterGeneratedPluginSwiftPackage'
+        ➜ Explicit dependency on target 'printing' in project 'printing'
+        ➜ Explicit dependency on target 'shared-preferences-foundation' in project 'shared_preferences_foundation'
+        ➜ Explicit dependency on target 'url-launcher-ios' in project 'url_launcher_ios'
+        ➜ Explicit dependency on target 'FlutterFramework' in project 'FlutterFramework'
+    Target 'url-launcher-ios' in project 'url_launcher_ios'
+        ➜ Explicit dependency on target 'url_launcher_ios' in project 'url_launcher_ios'
+        ➜ Explicit dependency on target 'url_launcher_ios_url_launcher_ios' in project 'url_launcher_ios'
+    Target 'url_launcher_ios' in project 'url_launcher_ios'
+        ➜ Explicit dependency on target 'url_launcher_ios_url_launcher_ios' in project 'url_launcher_ios'
+    Target 'url_launcher_ios_url_launcher_ios' in project 'url_launcher_ios' (no dependencies)
+    Target 'shared-preferences-foundation' in project 'shared_preferences_foundation'
+        ➜ Explicit dependency on target 'shared_preferences_foundation' in project 'shared_preferences_foundation'
+        ➜ Explicit dependency on target 'shared_preferences_foundation_shared_preferences_foundation' in project 'shared_preferences_foundation'
+    Target 'shared_preferences_foundation' in project 'shared_preferences_foundation'
+        ➜ Explicit dependency on target 'shared_preferences_foundation_shared_preferences_foundation' in project 'shared_preferences_foundation'
+    Target 'shared_preferences_foundation_shared_preferences_foundation' in project 'shared_preferences_foundation' (no dependencies)
+    Target 'printing' in project 'printing'
+        ➜ Explicit dependency on target 'printing' in project 'printing'
+        ➜ Explicit dependency on target 'FlutterFramework' in project 'FlutterFramework'
+    Target 'printing' in project 'printing'
+        ➜ Explicit dependency on target 'FlutterFramework' in project 'FlutterFramework'
+    Target 'FlutterFramework' in project 'FlutterFramework'
+        ➜ Explicit dependency on target 'FlutterFramework' in project 'FlutterFramework'
+    Target 'FlutterFramework' in project 'FlutterFramework' (no dependencies)
+
+GatherProvisioningInputs
+
+CreateBuildDescription
+
+ExecuteExternalTool /Applications/Xcode_26.6.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc --version
+
+ExecuteExternalTool /Applications/Xcode_26.6.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -v -E -dM -isysroot /Applications/Xcode_26.6.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS26.5.sdk -x c -c /dev/null
+
+ExecuteExternalTool /Applications/Xcode_26.6.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -v -E -dM -arch arm64 -isysroot /Applications/Xcode_26.6.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS26.5.sdk -x c -c /dev/null
+
+ExecuteExternalTool /Applications/Xcode_26.6.app/Contents/Developer/usr/bin/ibtool --version --output-format xml1
+
+ExecuteExternalTool /Applications/Xcode_26.6.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -v -E -dM -arch arm64 -isysroot /Applications/Xcode_26.6.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS26.5.sdk -x objective-c -c /dev/null
+
+ExecuteExternalTool /Applications/Xcode_26.6.app/Contents/Developer/usr/bin/actool --print-asset-tag-combinations --output-format xml1 /Users/runner/work/cliniflow/cliniflow/ios/Runner/Assets.xcassets
+
+ExecuteExternalTool /Applications/Xcode_26.6.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ld -version_details
+
+ExecuteExternalTool /Applications/Xcode_26.6.app/Contents/Developer/usr/bin/actool --version --output-format xml1
+
+Build description signature: 0f348645bb98444c124a24db4a2fa5a0
+Build description path: /Users/runner/Library/Developer/Xcode/DerivedData/Runner-bytshsvliyxuarcdduaamzirnode/Build/Intermediates.noindex/ArchiveIntermediates/Runner/IntermediateBuildFilesPath/XCBuildData/0f348645bb98444c124a24db4a2fa5a0.xcbuilddata
+/Users/runner/work/cliniflow/cliniflow/ios/Flutter/ephemeral/Packages/.packages/shared_preferences_foundation-2.5.7/Package.swift: error: shared_preferences_foundation_shared_preferences_foundation does not support provisioning profiles. shared_preferences_foundation_shared_preferences_foundation does not support provisioning profiles, but provisioning profile CliniFlow CI AppStore has been manually specified. Set the provisioning profile value to "Automatic" in the build settings editor. (in target 'shared_preferences_foundation_shared_preferences_foundation' from project 'shared_preferences_foundation')
+/Users/runner/work/cliniflow/cliniflow/ios/Flutter/ephemeral/Packages/.packages/url_launcher_ios-6.4.2/Package.swift: error: url_launcher_ios_url_launcher_ios does not support provisioning profiles. url_launcher_ios_url_launcher_ios does not support provisioning profiles, but provisioning profile CliniFlow CI AppStore has been manually specified. Set the provisioning profile value to "Automatic" in the build settings editor. (in target 'url_launcher_ios_url_launcher_ios' from project 'url_launcher_ios')
+note: Run script build phase 'Run Script' will be run during every build because the option to run the script phase "Based on dependency analysis" is unchecked. (in target 'Runner' from project 'Runner')
+note: Run script build phase 'Thin Binary' will be run during every build because the option to run the script phase "Based on dependency analysis" is unchecked. (in target 'Runner' from project 'Runner')
+** ARCHIVE FAILED **
+
+
+The following build commands failed:
+	Archiving workspace Runner with scheme Runner
+(1 failure)
